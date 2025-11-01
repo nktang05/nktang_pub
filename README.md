@@ -1,2 +1,2 @@
-# nktang_pub.github.io
+# nktang_pub
 Nicole's public repo

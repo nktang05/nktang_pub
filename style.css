@@ -182,7 +182,7 @@ nav a:hover {
 ========================================= */
 .overview,
 main {
-  max-width: 1300px;  /* expanded from 900px */
+  max-width: 1300px;
   margin: 3rem auto;
   padding: 2.5rem 3rem;
   background: white;
@@ -232,42 +232,19 @@ main {
   margin-bottom: 0.2rem;
 }
 
-.work-card p em {
-  display: block;
-  margin-bottom: 0.6rem;
-  font-style: italic;
-}
-
-.work-card ul {
-  list-style-position: outside;
-  margin-left: -4.8rem;
-  padding-left: 0;
-  margin-top: 0.4rem;
-}
-
-.work-card li {
-  margin-bottom: 0.4rem;
-}
-
 .work-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-.work-card img.logo-thumb:hover {
-  transform: scale(1.08);
-}
-
 @media (max-width: 700px) {
   .work-card {
     flex-direction: column;
-    align-items: flex-start;
   }
 
   .work-card img.logo-thumb {
     width: 100%;
     height: auto;
-    max-height: 120px;
     margin-bottom: 1rem;
   }
 }
@@ -296,11 +273,10 @@ main {
   width: 22px;
   height: 22px;
   object-fit: contain;
-  filter: none;
 }
 
 /* =========================================
-   HOME PAGE GRID EXPERIENCES
+   FEATURED EXPERIENCE GRID
 ========================================= */
 .featured-experience {
   max-width: 1150px;
@@ -329,13 +305,13 @@ main {
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
   color: var(--text);
   text-decoration: none;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .experience-card:hover {
-  background-color: var(--sage); 
+  background-color: var(--sage);
   transform: translateY(-6px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
 .experience-card img {
@@ -351,12 +327,6 @@ main {
   color: var(--navy-deep);
 }
 
-.experience-card p {
-  font-size: 0.95rem;
-  color: var(--text);
-  line-height: 1.5;
-}
-
 /* =========================================
    COMMUNITY CAROUSEL
 ========================================= */
@@ -370,7 +340,7 @@ main {
 .carousel-card {
   display: grid;
   grid-template-columns: 1.05fr 1fr;
-  align-items: center; /* ✅ centers image + text vertically */
+  align-items: center;
   justify-content: center;
   gap: 3.5rem;
   max-width: 1200px;
@@ -381,11 +351,12 @@ main {
   margin: 2rem auto;
 }
 
-
+/* =========================================
+   RESPONSIVE IMAGE CONTAINER
+========================================= */
 .carousel-container {
   position: relative;
   width: 100%;
-  overflow: hidden;
   border-radius: 14px;
   background-color: #f8f8f8;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -393,23 +364,32 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  overflow: visible; /* ⬅️ allow vertical images to fit naturally */
+  padding: 0.5rem 0;
 }
 
+/* ✅ Keeps both portrait & landscape photos visible and centered */
 .carousel img {
-  width: 100%;
+  display: block;
+  max-width: 100%;
+  max-height: 420px;
+  width: auto;
   height: auto;
+  margin: 0 auto;
   border-radius: 12px;
+  object-fit: contain; /* ensure entire image fits without cropping */
   transition: opacity 0.8s ease, transform 0.6s ease;
-  object-fit: contain;
 }
 
+/* Keeps slides properly aligned */
 .slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   opacity: 0;
   transition: opacity 0.8s ease-in-out;
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
+  inset: 0;
 }
 
 .slide.active {
@@ -418,7 +398,35 @@ main {
   z-index: 1;
 }
 
-/* Carousel controls */
+/* Centered dots under image */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  position: relative;
+  z-index: 3;
+}
+
+.carousel-dots button {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background-color: #ccc;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-dots button.active {
+  background-color: var(--rosegold);
+  transform: scale(1.2);
+}
+
+/* =========================================
+   NAVIGATION ARROWS
+========================================= */
 .carousel-btn {
   position: absolute;
   top: 50%;
@@ -441,32 +449,9 @@ main {
 .prev { left: 10px; }
 .next { right: 10px; }
 
-/* Dots */
-.carousel-dots {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin: 12px 0 6px;
-  position: relative;
-  z-index: 3;
-}
-
-.carousel-dots button {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  border: none;
-  background-color: #ccc;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.carousel-dots button.active {
-  background-color: var(--rosegold);
-  transform: scale(1.2);
-}
-
-/* Description */
+/* =========================================
+   TEXT DESCRIPTION
+========================================= */
 .carousel-description {
   flex: 1;
   max-width: 540px;
@@ -491,14 +476,13 @@ main {
   line-height: 1.8;
   color: var(--text);
   text-align: justify;
-  word-spacing: 0.02em;
-  letter-spacing: 0.01em;
-  max-width: 100%;
 }
 
+/* =========================================
+   MOBILE RESPONSIVE
+========================================= */
 @media (max-width: 950px) {
   .carousel-card {
-    display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
@@ -509,6 +493,10 @@ main {
   .carousel-container {
     width: 100%;
     max-width: 440px;
+  }
+
+  .carousel img {
+    max-height: 320px; /* smaller screens need smaller limit */
   }
 
   .carousel-description {
@@ -530,6 +518,7 @@ main {
   }
 }
 
+
 /* =========================================
    SCROLL-TRIGGERED REVEAL ANIMATIONS
 ========================================= */
@@ -537,7 +526,6 @@ main {
   opacity: 0;
   transform: translateY(50px);
   transition: opacity 1s ease-out, transform 1s ease-out;
-  will-change: opacity, transform;
 }
 
 .fade-in.visible {
@@ -545,35 +533,10 @@ main {
   transform: translateY(0);
 }
 
-.community-carousel:nth-of-type(odd).fade-in {
-  transition-delay: 0.1s;
-}
-.community-carousel:nth-of-type(even).fade-in {
-  transition-delay: 0.2s;
-}
-
-.reveal {
-  opacity: 0;
-  transform: translateY(25px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 @keyframes fadeIn {
-  0% {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  0% { opacity: 0; transform: translateY(15px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
-
 
 /* =========================================
    SECTION TITLE – Compact + Minimal
@@ -583,26 +546,24 @@ main {
   font-size: 1.9rem;
   font-weight: 700;
   color: var(--navy-deep);
-  margin: 1.5rem auto 0.6rem;  /* ⬅️ moved up + reduced space */
-  padding: 0;                  /* ⬅️ removes extra padding */
+  margin: 1.5rem auto 0.6rem;
+  padding: 0;
   letter-spacing: 0.03em;
   background: none;
   box-shadow: none;
 }
 
-/* Elegant accent line */
 .section-title::after {
   content: "";
   display: block;
   width: 70px;
   height: 2.5px;
   background: linear-gradient(to right, var(--rosegold), var(--sage));
-  margin: 0.4rem auto 0;  /* ⬅️ closer to text */
+  margin: 0.4rem auto 0;
   border-radius: 2px;
   opacity: 0.9;
 }
 
-/* Smooth fade-in effect */
 .section-title.fade-in {
   opacity: 0;
   transform: translateY(8px);

@@ -26,7 +26,6 @@ body {
   line-height: 1.6;
 }
 
-
 /* ======= HEADER & LOGO STYLING ======= */
 header {
   background-color: var(--navy-deep);
@@ -53,10 +52,9 @@ header {
   object-fit: contain;
   position: relative;
   top: 2px;
-  filter: brightness(1); /* keep natural color, no dark invert */
+  filter: brightness(1);
 }
 
-/* Navigation links */
 nav {
   display: flex;
   gap: 1.5rem;
@@ -73,7 +71,6 @@ nav a:hover {
   color: var(--rosegold);
 }
 
-/* Mobile header layout */
 @media (max-width: 700px) {
   header {
     flex-direction: column;
@@ -86,7 +83,6 @@ nav a:hover {
     gap: 1rem;
   }
 }
-
 
 /* =========================================
    HERO SECTION
@@ -106,7 +102,7 @@ nav a:hover {
   justify-content: center;
   gap: 3rem;
   max-width: 1100px;
-  flex-wrap: wrap; /* stacks on smaller screens */
+  flex-wrap: wrap;
 }
 
 .hero-text {
@@ -140,18 +136,16 @@ nav a:hover {
   height: 260px;
   border-radius: 50%;
   object-fit: cover;
-  object-position: 50% 35%; /* ⬅️ Adjusts the vertical focus of your face */
+  object-position: 50% 10%;
   border: 5px solid var(--rosegold);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
   transition: transform 0.4s ease;
 }
 
-
 .hero-photo img:hover {
   transform: scale(1.05) rotate(-2deg);
 }
 
-/* Responsive tweak */
 @media (max-width: 800px) {
   .hero-content {
     flex-direction: column-reverse;
@@ -162,7 +156,6 @@ nav a:hover {
     height: 200px;
   }
 }
-
 
 /* =========================================
    BUTTONS
@@ -189,12 +182,12 @@ nav a:hover {
 ========================================= */
 .overview,
 main {
-  max-width: 900px;
+  max-width: 1300px;  /* expanded from 900px */
   margin: 3rem auto;
-  padding: 2rem;
+  padding: 2.5rem 3rem;
   background: white;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+  border-radius: 14px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.06);
 }
 
 .card-grid {
@@ -202,7 +195,7 @@ main {
   gap: 1.5rem;
 }
 
-/* Work experience cards with logo images */
+/* Work experience cards */
 .work-card {
   display: flex;
   align-items: flex-start;
@@ -228,7 +221,6 @@ main {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
 }
 
-/* Text content */
 .work-card div {
   flex: 1;
   display: flex;
@@ -236,22 +228,19 @@ main {
   justify-content: flex-start;
 }
 
-/* Role spacing */
 .work-card h4 {
   margin-bottom: 0.2rem;
 }
 
 .work-card p em {
   display: block;
-  margin-top: 0;
   margin-bottom: 0.6rem;
   font-style: italic;
 }
 
-/* Align bullet list under logo */
 .work-card ul {
   list-style-position: outside;
-  margin-left: -4.8rem; /* shifts list left under logo */
+  margin-left: -4.8rem;
   padding-left: 0;
   margin-top: 0.4rem;
 }
@@ -265,14 +254,10 @@ main {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-
 .work-card img.logo-thumb:hover {
   transform: scale(1.08);
 }
 
-
-
-/* Mobile card stacking */
 @media (max-width: 700px) {
   .work-card {
     flex-direction: column;
@@ -294,7 +279,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.8rem; /* space between text and icon */
+  gap: 0.8rem;
 }
 
 .social-link {
@@ -311,13 +296,14 @@ main {
   width: 22px;
   height: 22px;
   object-fit: contain;
-  filter: none; /* removes color filter so it keeps the original LinkedIn blue */
+  filter: none;
 }
 
-/*HOME PAGE GRID EXPERIENCES*/
-
+/* =========================================
+   HOME PAGE GRID EXPERIENCES
+========================================= */
 .featured-experience {
-  max-width: 1100px;
+  max-width: 1150px;
   margin: 4rem auto;
   padding: 2rem;
   text-align: center;
@@ -347,8 +333,9 @@ main {
 }
 
 .experience-card:hover {
+  background-color: var(--sage); 
   transform: translateY(-6px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .experience-card img {
@@ -370,35 +357,50 @@ main {
   line-height: 1.5;
 }
 
-/* === COMMUNITY CAROUSEL === */
+/* =========================================
+   COMMUNITY CAROUSEL
+========================================= */
 .community-carousel {
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 2.5rem;
-  flex-wrap: wrap;
-  max-width: 1100px;
-  margin: 4rem auto;
-  padding: 2rem;
-  background-color: var(--ivory);
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  margin: 3rem auto;
+  padding: 1.5rem;
 }
+
+.carousel-card {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  align-items: center; /* ✅ centers image + text vertically */
+  justify-content: center;
+  gap: 3.5rem;
+  max-width: 1200px;
+  background-color: var(--ivory);
+  border-radius: 20px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  padding: 3rem 3.5rem;
+  margin: 2rem auto;
+}
+
 
 .carousel-container {
   position: relative;
-  width: 520px;
-  height: 350px;
+  width: 100%;
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: 14px;
+  background-color: #f8f8f8;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .carousel img {
   width: 100%;
-  height: 350px;
-  object-fit: cover;
+  height: auto;
   border-radius: 12px;
+  transition: opacity 0.8s ease, transform 0.6s ease;
+  object-fit: contain;
 }
 
 .slide {
@@ -407,91 +409,152 @@ main {
   position: absolute;
   top: 0;
   left: 0;
+  width: 100%;
 }
 
 .slide.active {
   opacity: 1;
+  position: relative;
   z-index: 1;
 }
 
-/* Buttons */
-.carousel-container button {
+/* Carousel controls */
+.carousel-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   background-color: rgba(0, 0, 0, 0.4);
+  color: white;
   border: none;
-  color: var(--ivory);
-  font-size: 2rem;
-  padding: 0.3rem 0.8rem;
+  font-size: 1.8rem;
   border-radius: 50%;
   cursor: pointer;
+  padding: 0.2rem 0.6rem;
   transition: background 0.3s ease;
+  z-index: 2;
 }
 
-.carousel-container button:hover {
+.carousel-btn:hover {
   background-color: var(--rosegold);
 }
 
-.prev {
-  left: 10px;
+.prev { left: 10px; }
+.next { right: 10px; }
+
+/* Dots */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 12px 0 6px;
+  position: relative;
+  z-index: 3;
 }
 
-.next {
-  right: 10px;
+.carousel-dots button {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background-color: #ccc;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-/* Description panel */
+.carousel-dots button.active {
+  background-color: var(--rosegold);
+  transform: scale(1.2);
+}
+
+/* Description */
 .carousel-description {
   flex: 1;
-  max-width: 400px;
+  max-width: 540px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  line-height: 1.75;
+  color: var(--text);
+  padding-right: 0.5rem;
 }
 
 .carousel-description h3 {
   color: var(--navy-deep);
-  font-size: 1.6rem;
+  font-size: 1.9rem;
   margin-bottom: 1rem;
+  line-height: 1.3;
 }
 
 .carousel-description p {
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: 1.05rem;
+  line-height: 1.8;
   color: var(--text);
+  text-align: justify;
+  word-spacing: 0.02em;
+  letter-spacing: 0.01em;
+  max-width: 100%;
 }
 
-/* Responsive layout */
-@media (max-width: 900px) {
-  .community-carousel {
+@media (max-width: 950px) {
+  .carousel-card {
+    display: flex;
     flex-direction: column;
+    align-items: center;
     text-align: center;
+    gap: 2rem;
+    padding: 2rem;
   }
 
   .carousel-container {
     width: 100%;
-    max-width: 480px;
-    height: 300px;
+    max-width: 440px;
   }
 
   .carousel-description {
     max-width: 90%;
     margin-top: 1rem;
+    text-align: left;
+  }
+
+  .carousel-description h3 {
+    text-align: center;
+    font-size: 1.6rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .carousel-description p {
+    text-align: left;
+    font-size: 1rem;
+    line-height: 1.7;
   }
 }
 
-
-
 /* =========================================
-   ANIMATIONS
+   SCROLL-TRIGGERED REVEAL ANIMATIONS
 ========================================= */
 .fade-in {
   opacity: 0;
-  transform: translateY(20px);
-  animation: fadeIn 1.2s ease-out forwards;
+  transform: translateY(50px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+  will-change: opacity, transform;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.community-carousel:nth-of-type(odd).fade-in {
+  transition-delay: 0.1s;
+}
+.community-carousel:nth-of-type(even).fade-in {
+  transition-delay: 0.2s;
 }
 
 .reveal {
   opacity: 0;
-  transform: translateY(40px);
+  transform: translateY(25px);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
@@ -501,8 +564,52 @@ main {
 }
 
 @keyframes fadeIn {
-  to {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  100% {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+
+/* =========================================
+   SECTION TITLE – Compact + Minimal
+========================================= */
+.section-title {
+  text-align: center;
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--navy-deep);
+  margin: 1.5rem auto 0.6rem;  /* ⬅️ moved up + reduced space */
+  padding: 0;                  /* ⬅️ removes extra padding */
+  letter-spacing: 0.03em;
+  background: none;
+  box-shadow: none;
+}
+
+/* Elegant accent line */
+.section-title::after {
+  content: "";
+  display: block;
+  width: 70px;
+  height: 2.5px;
+  background: linear-gradient(to right, var(--rosegold), var(--sage));
+  margin: 0.4rem auto 0;  /* ⬅️ closer to text */
+  border-radius: 2px;
+  opacity: 0.9;
+}
+
+/* Smooth fade-in effect */
+.section-title.fade-in {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.section-title.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
 }

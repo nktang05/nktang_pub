@@ -259,5 +259,35 @@
   </footer>
 
   <script src="script.js"></script>
+  <script>
+    // ====== Hidden Page View Tracker (SimpleCounter version) ======
+    const pageKey = window.location.pathname
+      .split("/")
+      .pop()
+      .replace(".html", "") || "index";
+  
+    const namespace = "nicoletang_portfolio";
+  
+    // 🔹 Ensure counter exists (creates automatically if not found)
+    fetch(`https://simplecounterapi.com/api/v1/${namespace}_${pageKey}/create`, {
+      method: "POST"
+    })
+      .then(() => {
+        // 🔹 Increment view count for this page
+        return fetch(
+          `https://simplecounterapi.com/api/v1/${namespace}_${pageKey}/hit`,
+          { method: "POST" }
+        );
+      })
+      .then(res => res.json())
+      .then(data => {
+        // Store locally for your hidden reference
+        localStorage.setItem(`views_${pageKey}`, data.value);
+        console.log(`📊 ${pageKey}: ${data.value} views`);
+      })
+      .catch(err => console.error("SimpleCounter error:", err));
+  </script>
+
+
 </body>
 </html>

@@ -94,25 +94,22 @@
   
       for (const page of pages) {
         try {
-          // 🔹 Ensure counter exists and increment by 0 (CountAPI auto-creates)
-          const hitRes = await fetch(
-            `https://api.countapi.xyz/update/${namespace}_${page}?amount=0`
-          );
-          const hitData = await hitRes.json();
+          // 🔹 Create a counter if it doesn't exist (initializes to 0)
+          await fetch(`https://simplecounterapi.com/api/v1/${namespace}_${page}/create`, {
+            method: "POST"
+          });
   
-          // 🔹 Fetch the count to display (this will now always exist)
-          const getRes = await fetch(
-            `https://api.countapi.xyz/get/${namespace}_${page}`
-          );
-          const getData = await getRes.json();
+          // 🔹 Fetch current value
+          const res = await fetch(`https://simplecounterapi.com/api/v1/${namespace}_${page}`);
+          const data = await res.json();
   
           const li = document.createElement("li");
-          li.innerHTML = `<strong>${page}.html</strong> <span>${getData.value ?? 0} views</span>`;
+          li.innerHTML = `<strong>${page}.html</strong> <span>${data.value ?? 0} views</span>`;
           list.appendChild(li);
         } catch (err) {
-          console.error(`Error loading ${page}:`, err);
+          console.error(`❌ Error fetching ${page}:`, err);
           const li = document.createElement("li");
-          li.innerHTML = `<strong>${page}.html</strong> <span>Error</span>`;
+          li.innerHTML = `<strong>${page}.html</strong> <span style="color:red;">Error</span>`;
           list.appendChild(li);
         }
       }
@@ -122,6 +119,7 @@
   
     loadStats();
   </script>
+  
   
 </body>
 </html>

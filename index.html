@@ -191,5 +191,24 @@
   </footer>
 
   <script src="script.js"></script>
+  <script>
+    // ====== Hidden Page View Tracker ======
+    const pageKey = window.location.pathname
+      .split("/")
+      .pop()
+      .replace(".html", "") || "index";
+  
+    // Hit CountAPI endpoint unique to this page
+    fetch(`https://api.countapi.xyz/hit/nicoletang_portfolio_${pageKey}`)
+      .then(res => res.json())
+      .then(data => {
+        // Store for your reference (invisible)
+        localStorage.setItem(`views_${pageKey}`, data.value);
+        console.log(`📊 ${pageKey}: ${data.value} views`);
+      })
+      .catch(err => console.error("CountAPI error:", err));
+  </script>
+
+
 </body>
 </html>

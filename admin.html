@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio View Stats</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: "Montserrat", sans-serif;
+      background-color: #f8f2f4;
+      color: #001f3f;
+      margin: 0;
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .admin-card {
+      background: #fff;
+      padding: 2rem 3rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      max-width: 600px;
+      width: 100%;
+    }
+    h1 {
+      color: #b67c8b;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid #eee;
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-card">
+    <h1>🔒 Portfolio Page Views</h1>
+    <ul id="stats"></ul>
+  </div>
+
+  <script>
+    const pass = prompt("Enter admin password:");
+    if (pass !== "Nicole123!") {
+      alert("Access denied.");
+      window.location.href = "/";
+    }
+
+    const pages = ["index", "about", "community", "research", "abroad"];
+
+    async function loadStats() {
+      const list = document.getElementById("stats");
+      for (const page of pages) {
+        const res = await fetch(`https://api.countapi.xyz/get/nicoletang_portfolio_${page}`);
+        const data = await res.json();
+        const li = document.createElement("li");
+        li.innerHTML = `<strong>${page}.html</strong> <span>${data.value || 0} views</span>`;
+        list.appendChild(li);
+      }
+    }
+    loadStats();
+  </script>
+</body>
+</html>

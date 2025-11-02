@@ -858,3 +858,62 @@ footer {
   position: relative;
   z-index: 1 !important;
 }
+
+/* =========================================
+   SKILLS SUMMARY & AWARDS — POLISHED WITH BULLETS
+========================================= */
+
+/* Section headers */
+section h3 {
+  font-size: 1.4rem;
+  color: var(--navy-mid);
+  font-weight: 700;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  position: relative;
+}
+
+/* Rose-gold accent bar beside header */
+section h3::before {
+  content: "";
+  width: 4px;
+  height: 24px;
+  background: var(--rosegold);
+  border-radius: 2px;
+  display: inline-block;
+}
+
+/* Keep bullets visible and evenly spaced */
+.skills,
+section ul {
+  list-style-type: disc;         /* ✅ restores bullets */
+  padding-left: 1.5rem;          /* ✅ proper indentation */
+  margin-top: 0.8rem;
+}
+
+/* List items spacing and readability */
+.skills li,
+section ul li {
+  margin-bottom: 0.9rem;
+  font-size: 0.96rem;
+  line-height: 1.75;
+  color: var(--text);
+  text-align: justify;
+}
+
+/* Highlight labels like “Technical Skills:” or award names */
+.skills li strong,
+section ul li strong {
+  color: var(--navy-deep);
+  font-weight: 600;
+}
+
+/* Subtle divider between stacked sections */
+section + section {
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  padding-top: 2rem;
+  margin-top: 2rem;
+}

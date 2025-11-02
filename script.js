@@ -106,48 +106,44 @@ document.addEventListener("DOMContentLoaded", () => {
   fadeElements.forEach((el) => observer.observe(el));
 });
 
-// ===============================
-// Modal Logic
-// ===============================
-let activeModal = null;
+document.addEventListener("DOMContentLoaded", () => {
+  // open modal
+  document.querySelectorAll(".org-logo").forEach((logo) => {
+    logo.addEventListener("click", (e) => {
+      e.preventDefault();
+      const modalId = logo.getAttribute("data-modal");
+      const modal = document.getElementById(modalId);
 
-function openModal(id) {
-  if (activeModal) {
-    activeModal.classList.remove("visible");
-    setTimeout(() => (activeModal.style.display = "none"), 200);
-    activeModal = null;
-  }
+      if (modal) {
+        // move modal to body to escape stacking contexts
+        document.body.appendChild(modal);
+        modal.classList.add("visible");
+      }
+    });
+  });
 
-  const modal = document.getElementById(`modal-${id}`);
-  if (modal) {
-    modal.style.display = "flex";
-    requestAnimationFrame(() => modal.classList.add("visible"));
-    activeModal = modal;
-    document.body.style.overflow = "hidden";
-  }
-}
+  // close when clicking X
+  document.querySelectorAll(".close").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      btn.closest(".modal").classList.remove("visible");
+    });
+  });
 
-function closeModal(id) {
-  const modal = document.getElementById(`modal-${id}`);
-  if (modal) {
-    modal.classList.remove("visible");
-    setTimeout(() => {
-      modal.style.display = "none";
-      document.body.style.overflow = "";
-      if (activeModal === modal) activeModal = null;
-    }, 200);
-  }
-}
+  // close when clicking outside modal-content
+  document.addEventListener("click", (e) => {
+    const modal = document.querySelector(".modal.visible");
+    if (modal && e.target === modal) {
+      modal.classList.remove("visible");
+    }
+  });
 
-window.addEventListener("click", (e) => {
-  if (activeModal && e.target === activeModal)
-    closeModal(activeModal.id.replace("modal-", ""));
+  // close with Escape key
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      document.querySelectorAll(".modal.visible").forEach((m) =>
+        m.classList.remove("visible")
+      );
+    }
+  });
 });
 
-window.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && activeModal)
-    closeModal(activeModal.id.replace("modal-", ""));
-});
-
-window.openModal = openModal;
-window.closeModal = closeModal;

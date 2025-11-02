@@ -983,3 +983,163 @@ section + section {
 :target {
   scroll-margin-top: 90px; /* adjust depending on your header height */
 }
+
+
+/* =========================================
+   INTERACTIVE ORGANIZATION LOGOS
+========================================= */
+.org-logo {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  position: relative;
+  margin-bottom: 0.8rem;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.org-logo img.logo-thumb {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.org-logo:hover img.logo-thumb {
+  transform: scale(1.07);
+  filter: brightness(1.1);
+}
+
+.click-label {
+  font-size: 0.75rem;
+  color: var(--rosegold);
+  margin-top: 0.35rem;
+  text-align: center;
+  opacity: 0.9;
+}
+
+/* =========================================
+   UNIFIED EXPERIENCE MODAL — NAVY + ROSE-GOLD THEME
+========================================= */
+
+/* === Backdrop Layer === */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(17, 28, 46, 0.3); /* soft navy overlay */
+  backdrop-filter: blur(10px) brightness(1.05);
+  z-index: 9999;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.modal.visible {
+  display: flex;
+  opacity: 1;
+}
+
+/* === Modal Box === */
+.modal-content {
+  background: linear-gradient(165deg, var(--ivory) 0%, #fdfbf8 60%, #f6eee8 100%);
+  border: 1.5px solid rgba(201, 163, 131, 0.4); /* rose-gold border */
+  border-radius: 22px;
+  padding: 2.4rem 3rem;
+  max-width: 640px;
+  width: 90%;
+  text-align: center;
+  box-shadow:
+    0 6px 20px rgba(27, 42, 65, 0.15),
+    0 0 12px rgba(201, 163, 131, 0.25); /* navy + rose-gold glow */
+  animation: fadePop 0.4s ease forwards;
+  color: var(--text);
+  position: relative;
+}
+
+/* === Modal Title === */
+.modal-content h3 {
+  color: var(--navy-deep);
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-top: 0.8rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.3px;
+  text-shadow: 0 1px 2px rgba(27, 42, 65, 0.1);
+}
+
+/* === Modal Text === */
+.modal-content p {
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1.75;
+  margin-bottom: 1.2rem;
+  text-align: justify;
+}
+
+/* === Optional Modal Logos (if present) === */
+.modal-logo {
+  width: 80px;
+  height: auto;
+  margin-bottom: 0.5rem;
+  opacity: 0.95;
+  filter: drop-shadow(0 2px 3px rgba(27, 42, 65, 0.15));
+}
+
+/* === Links inside Modals === */
+.modal-link-text {
+  color: var(--navy-deep);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1.5px solid rgba(201, 163, 131, 0.6);
+  padding-bottom: 2px;
+  transition: all 0.3s ease;
+}
+
+.modal-link-text:hover {
+  color: var(--rosegold);
+  border-color: var(--rosegold);
+}
+
+/* === Close Button === */
+.modal .close {
+  position: absolute;
+  top: 1rem;
+  right: 1.2rem;
+  font-size: 1.4rem;
+  color: var(--navy-light);
+  opacity: 0.8;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.3s ease, color 0.3s ease;
+}
+
+.modal .close:hover {
+  transform: rotate(90deg);
+  opacity: 1;
+  color: var(--rosegold);
+}
+
+/* === Entry Animation === */
+@keyframes fadePop {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* === "click for more" text under logos === */
+.click-hint {
+  font-size: 0.85rem;
+  color: rgba(27, 42, 65, 0.6);
+  text-align: center;
+  margin-top: 0.3rem;
+  font-style: italic;
+}

@@ -76,7 +76,7 @@
   </div>
 
   <script>
-    // Password protection
+    // ===== Admin Page View Dashboard =====
     const pass = prompt("Enter admin password:");
     if (pass !== "Nicole123!") {
       alert("Access denied.");
@@ -90,24 +90,39 @@
   
     async function loadStats() {
       list.innerHTML = "";
-      loading.textContent = "Loading page view data...";
+      loading.textContent = "Loading data...";
   
       for (const page of pages) {
         try {
-          // 🔹 Create a counter if it doesn't exist (initializes to 0)
+          // Create key (safe to call multiple times)
           await fetch(`https://simplecounterapi.com/api/v1/${namespace}_${page}/create`, {
-            method: "POST"
+            method: "POST",
+            mode: "cors"
           });
   
-          // 🔹 Fetch current value
-          const res = await fetch(`https://simplecounterapi.com/api/v1/${namespace}_${page}`);
-          const data = await res.json();
+          // Fetch current value safely
+          const res = await fetch(`https://simplecounterapi.com/api/v1/${namespace}_${page}`, {
+            mode: "cors"
+          });
+  
+          if (!res.ok) throw new Error("Network response not ok");
+          const text = await res.text();
+  
+          // Some responses may be plain text instead of JSON
+          let value = 0;
+          try {
+            const data = JSON.parse(text);
+            value = data.value ?? 0;
+          } catch {
+            // If parsing fails, fallback to text integer
+            value = parseInt(text) || 0;
+          }
   
           const li = document.createElement("li");
-          li.innerHTML = `<strong>${page}.html</strong> <span>${data.value ?? 0} views</span>`;
+          li.innerHTML = `<strong>${page}.html</strong> <span>${value} views</span>`;
           list.appendChild(li);
         } catch (err) {
-          console.error(`❌ Error fetching ${page}:`, err);
+          console.error(`❌ ${page} failed:`, err);
           const li = document.createElement("li");
           li.innerHTML = `<strong>${page}.html</strong> <span style="color:red;">Error</span>`;
           list.appendChild(li);
@@ -119,6 +134,7 @@
   
     loadStats();
   </script>
+  
   
   
 </body>

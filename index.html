@@ -192,33 +192,25 @@
 
   <script src="script.js"></script>
   <script>
-    // ====== Hidden Page View Tracker (SimpleCounter version) ======
-    const pageKey = window.location.pathname
-      .split("/")
-      .pop()
-      .replace(".html", "") || "index";
-  
+    const pageKey = window.location.pathname.split("/").pop().replace(".html", "") || "index";
     const namespace = "nicoletang_portfolio";
   
-    // 🔹 Ensure counter exists (creates automatically if not found)
+    // Create counter and hit increment
     fetch(`https://simplecounterapi.com/api/v1/${namespace}_${pageKey}/create`, {
-      method: "POST"
+      method: "POST",
+      mode: "cors"
     })
       .then(() => {
-        // 🔹 Increment view count for this page
-        return fetch(
-          `https://simplecounterapi.com/api/v1/${namespace}_${pageKey}/hit`,
-          { method: "POST" }
-        );
+        return fetch(`https://simplecounterapi.com/api/v1/${namespace}_${pageKey}/hit`, {
+          method: "POST",
+          mode: "cors"
+        });
       })
-      .then(res => res.json())
-      .then(data => {
-        // Store locally for your hidden reference
-        localStorage.setItem(`views_${pageKey}`, data.value);
-        console.log(`📊 ${pageKey}: ${data.value} views`);
-      })
+      .then(res => res.text())
+      .then(txt => console.log(`📊 ${pageKey}: ${txt} views`))
       .catch(err => console.error("SimpleCounter error:", err));
   </script>
+  
   
 
 

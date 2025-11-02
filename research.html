@@ -131,25 +131,7 @@
   </footer>
 
   <script src="script.js"></script>
-  <script>
-    const pageKey = window.location.pathname.split("/").pop().replace(".html", "") || "index";
-    const namespace = "nicoletang_portfolio";
-  
-    // Create counter and hit increment
-    fetch(`https://simplecounterapi.com/api/v1/${namespace}_${pageKey}/create`, {
-      method: "POST",
-      mode: "cors"
-    })
-      .then(() => {
-        return fetch(`https://simplecounterapi.com/api/v1/${namespace}_${pageKey}/hit`, {
-          method: "POST",
-          mode: "cors"
-        });
-      })
-      .then(res => res.text())
-      .then(txt => console.log(`📊 ${pageKey}: ${txt} views`))
-      .catch(err => console.error("SimpleCounter error:", err));
-  </script>
+
   
   
 

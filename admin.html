@@ -3,70 +3,126 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfolio View Stats</title>
+  <title>Portfolio Page Views</title>
   <link rel="stylesheet" href="style.css" />
   <style>
     body {
       font-family: "Montserrat", sans-serif;
-      background-color: #f8f2f4;
-      color: #001f3f;
-      margin: 0;
-      padding: 3rem;
+      background-color: #faf6f8;
+      color: #1e1e1e;
       display: flex;
-      flex-direction: column;
-      align-items: center;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      margin: 0;
+      padding: 4rem 1rem;
     }
+
     .admin-card {
       background: #fff;
-      padding: 2rem 3rem;
       border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      max-width: 600px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      padding: 2rem 3rem;
       width: 100%;
+      max-width: 600px;
+      animation: fadeIn 0.6s ease;
     }
+
     h1 {
-      color: #b67c8b;
       text-align: center;
+      font-weight: 700;
+      color: #b67c8b;
       margin-bottom: 2rem;
+      font-size: 1.6rem;
     }
+
     ul {
       list-style: none;
       padding: 0;
+      margin: 0;
     }
+
     li {
       display: flex;
       justify-content: space-between;
-      padding: 0.6rem 0;
-      border-bottom: 1px solid #eee;
+      align-items: center;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid #f0e6e9;
+      font-size: 1rem;
+    }
+
+    li strong {
+      color: #001f3f;
+    }
+
+    .loading {
+      text-align: center;
+      color: #b67c8b;
+      font-style: italic;
+      margin-top: 1rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
   <div class="admin-card">
     <h1>🔒 Portfolio Page Views</h1>
+    <div id="loading" class="loading">Initializing counters...</div>
     <ul id="stats"></ul>
   </div>
 
   <script>
+    // Password protection
     const pass = prompt("Enter admin password:");
     if (pass !== "Nicole123!") {
       alert("Access denied.");
       window.location.href = "/";
     }
-
+  
     const pages = ["index", "about", "community", "research", "abroad"];
-
+    const namespace = "nicoletang_portfolio";
+    const list = document.getElementById("stats");
+    const loading = document.getElementById("loading");
+  
     async function loadStats() {
-      const list = document.getElementById("stats");
+      list.innerHTML = "";
+      loading.textContent = "Loading page view data...";
+  
       for (const page of pages) {
-        const res = await fetch(`https://api.countapi.xyz/get/nicoletang_portfolio_${page}`);
-        const data = await res.json();
-        const li = document.createElement("li");
-        li.innerHTML = `<strong>${page}.html</strong> <span>${data.value || 0} views</span>`;
-        list.appendChild(li);
+        try {
+          // 🔹 Ensure counter exists and increment by 0 (CountAPI auto-creates)
+          const hitRes = await fetch(
+            `https://api.countapi.xyz/update/${namespace}_${page}?amount=0`
+          );
+          const hitData = await hitRes.json();
+  
+          // 🔹 Fetch the count to display (this will now always exist)
+          const getRes = await fetch(
+            `https://api.countapi.xyz/get/${namespace}_${page}`
+          );
+          const getData = await getRes.json();
+  
+          const li = document.createElement("li");
+          li.innerHTML = `<strong>${page}.html</strong> <span>${getData.value ?? 0} views</span>`;
+          list.appendChild(li);
+        } catch (err) {
+          console.error(`Error loading ${page}:`, err);
+          const li = document.createElement("li");
+          li.innerHTML = `<strong>${page}.html</strong> <span>Error</span>`;
+          list.appendChild(li);
+        }
       }
+  
+      loading.style.display = "none";
     }
+  
     loadStats();
   </script>
+  
 </body>
 </html>
+

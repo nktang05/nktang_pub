@@ -975,3 +975,11 @@ section + section {
     font-size: 0.9rem;
   }
 }
+
+
+/* =========================================
+   FIX: Prevent anchor targets from hiding under sticky header
+========================================= */
+:target {
+  scroll-margin-top: 90px; /* adjust depending on your header height */
+}

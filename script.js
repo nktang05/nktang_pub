@@ -106,43 +106,50 @@ document.addEventListener("DOMContentLoaded", () => {
   fadeElements.forEach((el) => observer.observe(el));
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  // open modal
-  document.querySelectorAll(".org-logo").forEach((logo) => {
-    logo.addEventListener("click", (e) => {
-      e.preventDefault();
-      const modalId = logo.getAttribute("data-modal");
-      const modal = document.getElementById(modalId);
+//MODAL STUFF//
 
+document.addEventListener("DOMContentLoaded", () => {
+  // OPEN MODAL for org-logo and usc-icon
+  document.querySelectorAll(".org-logo, .usc-icon").forEach((trigger) => {
+    trigger.addEventListener("click", (e) => {
+      e.preventDefault();
+      const modalId = trigger.getAttribute("data-modal");
+      const modal = document.getElementById(modalId);
       if (modal) {
-        // move modal to body to escape stacking contexts
         document.body.appendChild(modal);
         modal.classList.add("visible");
+        document.body.style.overflow = "hidden";
       }
     });
   });
 
-  // close when clicking X
-  document.querySelectorAll(".close").forEach((btn) => {
+  // CLOSE MODAL (X)
+  document.querySelectorAll(".modal .close").forEach((btn) => {
     btn.addEventListener("click", () => {
-      btn.closest(".modal").classList.remove("visible");
+      const modal = btn.closest(".modal");
+      if (modal) {
+        modal.classList.remove("visible");
+        document.body.style.overflow = "";
+      }
     });
   });
 
-  // close when clicking outside modal-content
+  // CLOSE MODAL when clicking outside content
   document.addEventListener("click", (e) => {
     const modal = document.querySelector(".modal.visible");
     if (modal && e.target === modal) {
       modal.classList.remove("visible");
+      document.body.style.overflow = "";
     }
   });
 
-  // close with Escape key
+  // CLOSE MODAL on Escape
   window.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
-      document.querySelectorAll(".modal.visible").forEach((m) =>
-        m.classList.remove("visible")
-      );
+      document.querySelectorAll(".modal.visible").forEach((m) => {
+        m.classList.remove("visible");
+        document.body.style.overflow = "";
+      });
     }
   });
 });

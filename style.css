@@ -317,45 +317,54 @@ footer {
 
 .carousel-card {
   display: grid;
-  grid-template-columns: 1.05fr 1fr;
-  align-items: center;
-  justify-content: center;
-  gap: 3.5rem;
+  grid-template-columns: 0.95fr 1fr; /* image slightly smaller than text for balance */
+  align-items: center;              /* vertically center both sides */
+  justify-items: center;            /* horizontally center both sides */
+  gap: 3rem;
   max-width: 1200px;
   background-color: var(--ivory);
   border-radius: 20px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
   padding: 3rem 3.5rem;
   margin: 2rem auto;
+  position: relative;
 }
 
-/* =========================================
-   FIXED CAROUSEL FRAME + CLEAN TRANSITION
-========================================= */
+/* ✅ Centers and constrains the carousel area */
 .carousel-container {
   position: relative;
-  width: 100%;
-  height: 420px;
-  background: none;        /* ❌ remove white box */
-  border-radius: 0;        /* ❌ remove curved edges */
-  box-shadow: none;        /* ❌ remove shadow */
-  overflow: hidden;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;   /* keeps image side proportional */
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: none;
+  border-radius: 12px;
+  box-shadow: none;
 }
 
-/* ✅ Keeps portrait & landscape images visible without stretching */
+/* ✅ Keeps each slide centered and contained */
 .carousel img {
   width: 100%;
   height: 100%;
-  object-fit: contain; /* fits image to frame */
+  object-fit: contain; /* ensures full photo visibility */
   border-radius: 12px;
   display: block;
-  transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
 }
 
-/* ✅ Clean fade — no blending */
+/* ✅ Text stays neatly aligned toward the top */
+.carousel-description {
+  align-self: start;
+  text-align: left;
+  line-height: 1.7;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+
 .slide {
   position: absolute;
   inset: 0;
@@ -373,6 +382,7 @@ footer {
   transition-delay: 0s;
   z-index: 1;
 }
+
 
 /* =========================================
    CAROUSEL DOTS – Classic circular + bottom aligned
@@ -1143,3 +1153,70 @@ section + section {
   margin-top: 0.3rem;
   font-style: italic;
 }
+
+
+/* Ensure parent card allows absolute positioning */
+.carousel-card {
+  position: relative;
+  overflow: hidden;
+}
+
+/* === USC Character Icon === */
+.usc-icon {
+  position: absolute;
+  bottom: 1.2rem;
+  right: 1.5rem;
+  width: clamp(65px, 10vw, 115px);
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  z-index: 5;
+}
+
+
+.usc-icon img {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: none;
+  mix-blend-mode: normal;
+}
+
+.usc-icon:hover {
+  transform: scale(1.08) rotate(4deg);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.25));
+}
+
+/* === MOBILE FIX === */
+@media (max-width: 950px) {
+  .carousel-card {
+    position: relative;
+  }
+
+  .usc-icon {
+    position: static;          /* ❌ not absolute anymore */
+    align-self: flex-end;      /* ✅ push to right within column layout */
+    margin-top: 0.8rem;
+    margin-right: 1rem;
+    width: clamp(60px, 18vw, 100px);
+  }
+}
+
+
+
+
+/* =========================================
+   USC Icon — bottom corner placement & scaling
+========================================= */
+.usc-icon {
+  position: absolute;
+  bottom: 1.2rem;
+  right: 1.5rem;
+  width: clamp(60px, 8vw, 90px); /* ✅ responsive scaling (min–max) */
+  height: auto;
+  cursor: pointer;
+  z-index: 5; /* stays above card but below modal */
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+

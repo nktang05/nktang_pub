@@ -250,13 +250,41 @@ main {
 }
 
 /* =========================================
-   FOOTER
+   FOOTER FIX — Always below modals
 ========================================= */
+footer {
+  position: relative;
+  z-index: 1;
+  background: var(--ivory);
+  text-align: center;
+  padding: 1.5rem 0;
+  color: var(--text);
+  font-size: 0.9rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
 .footer-content {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.8rem;
+  gap: 1rem;
+}
+
+.footer-content img.social-icon {
+  width: 22px;
+  height: 22px;
+  opacity: 0.85;
+  transition: opacity 0.3s ease;
+}
+
+.footer-content img.social-icon:hover {
+  opacity: 1;
+}
+
+
+/* Ensure modal overlays are always above footer */
+.modal {
+  z-index: 9999;
 }
 
 .social-link {
@@ -275,66 +303,7 @@ main {
   object-fit: contain;
 }
 
-/* =========================================
-   FEATURED EXPERIENCE GRID
-========================================= */
-.featured-experience {
-  max-width: 1150px;
-  margin: 4rem auto;
-  padding: 2rem;
-  text-align: center;
-}
 
-.featured-experience h3 {
-  color: var(--navy-deep);
-  margin-bottom: 2rem;
-  font-size: 1.8rem;
-}
-
-.experience-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.8rem;
-}
-
-.experience-card {
-  background-color: var(--beige);
-  border-radius: 12px;
-  padding: 1.5rem;
-  text-align: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-  color: var(--text);
-  text-decoration: none;
-  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.experience-card:hover {
-  background-color: var(--navy-light);
-  color: var(--beige);
-  transform: translateY(-6px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-}
-
-/* ensures nested elements also change */
-.experience-card:hover h4,
-.experience-card:hover p,
-.experience-card:hover li,
-.experience-card:hover a {
-  color: var(--beige);
-}
-
-.experience-card img {
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-  margin-bottom: 1rem;
-}
-
-.experience-card h4 {
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: var(--navy-deep);
-}
 
 /* =========================================
    COMMUNITY CAROUSEL
@@ -713,4 +682,179 @@ main {
 .inline-link:hover {
   color: var(--rosegold);
   border-color: var(--rosegold);
+}
+
+
+
+/* === FIX VISIBILITY DEBUG === */
+.hero-content, .featured-experience, .experience-grid, .experience-card {
+  opacity: 1 !important;
+  visibility: visible !important;
+  color: var(--ivory) !important;
+}
+
+.hero-text h1, .hero-text p {
+  color: var(--ivory) !important;
+}
+
+.featured-experience {
+  background-color: var(--ivory);
+  color: var(--text);
+}
+
+.experience-card h4, .experience-card p {
+  color: var(--text);
+}
+
+.experience-card img {
+  display: block;
+}
+
+/* =========================================
+   FEATURED EXPERIENCE GRID
+========================================= */
+.featured-experience {
+  max-width: 1150px;
+  margin: 4rem auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.featured-experience h3 {
+  color: var(--navy-deep);
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+}
+
+.experience-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.8rem;
+}
+
+.experience-card {
+  background-color: var(--beige);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  color: var(--text);
+  text-decoration: none;
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.experience-card:hover {
+  background-color: var(--navy-mid);
+  color: var(--beige);
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ensures nested elements also change */
+.experience-card:hover h4,
+.experience-card:hover p,
+.experience-card:hover li,
+.experience-card:hover a {
+  color: var(--beige);
+}
+
+.experience-card img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 1rem;
+}
+
+.experience-card h4 {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--navy-deep);
+}
+
+/* Mobile layout */
+@media (max-width: 950px) {
+  .experience-grid {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+  }
+
+  .experience-card {
+    max-width: 100%;
+    min-height: 300px;
+    padding: 2rem 1.5rem;
+  }
+}
+
+
+/* =========================================
+   FINAL MODAL FIX — Above Footer
+========================================= */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
+  padding: 2rem;
+  overflow-y: auto;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.modal.visible {
+  display: flex;
+  opacity: 1;
+}
+
+.modal-content {
+  background: var(--ivory);
+  color: var(--text);
+  border-radius: 14px;
+  padding: 2rem 2.5rem;
+  max-width: 700px;
+  width: 90%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  animation: slideUp 0.25s ease;
+  line-height: 1.7;
+  position: relative;
+  z-index: 1000000;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.close {
+  position: absolute;
+  top: 1rem;
+  right: 1.2rem;
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: var(--navy-deep);
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close:hover {
+  color: var(--rosegold);
+}
+
+footer {
+  position: relative;
+  z-index: 1 !important;
 }

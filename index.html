@@ -1,108 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nicole Tang | Portfolio</title>
-    <link rel="icon" type="image/png" href="img/logos/logo.png">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-  </head>
-  
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nicole Tang | Portfolio</title>
+  <link rel="icon" type="image/png" href="img/logos/logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
 <body>
+  <!-- ===== HEADER ===== -->
   <header>
     <a href="index.html" class="logo-link">
-      <img src="img/logos/logo.png" alt="Nicole Tang Logo" class="logo-img">
+      <img src="img/logos/logo.png" alt="Nicole Tang Logo" class="logo-img" />
     </a>
     <nav>
       <a href="index.html">Home</a>
       <a href="about.html">Experience</a>
       <a href="research.html">Research Projects</a>
-      <a href="community.html">Community</a>
+      <a href="community.html">Community Involvement</a>
       <a href="abroad.html">Global Health</a>
     </nav>
   </header>
-  
 
+  <!-- ===== HERO SECTION ===== -->
   <section class="hero">
     <div class="hero-content fade-in">
       <div class="hero-text">
         <h1>Hey! I’m <span class="highlight">Nicole Tang.</span></h1>
         <p>
-          Public Health Data Scientist passionate about health equity, global collaboration, and 
-          the intersection of data, policy, and community empowerment.
+          Public Health Data Scientist passionate about health equity, global collaboration, 
+          and the intersection of data, policy, and community empowerment.
         </p>
-        <a href="https://www.linkedin.com/in/nicolektang" class="button">Contact me on Linkedin</a>
+        <a href="https://www.linkedin.com/in/nicolektang" class="button">Contact me on LinkedIn</a>
       </div>
-  
+
       <div class="hero-photo">
-        <img src="img/profile.JPG" alt="Photo of Nicole Tang">
+        <img src="img/profile.JPG" alt="Photo of Nicole Tang" />
       </div>
     </div>
   </section>
-  
 
+  <!-- ===== FEATURED EXPERIENCE ===== -->
+  <section class="featured-experience fade-in">
+    <h3>Featured Experience</h3>
+    <div class="experience-grid">
 
-  <!-- FEATURED EXPERIENCE SECTION -->
-<section class="featured-experience fade-in">
-  <h3>Featured Experience</h3>
-  <div class="experience-grid">
+      <div class="experience-card" onclick="openModal('cdph')">
+        <img src="img/logos/cdphnavy.png" alt="CDPH Logo" />
+        <h4>California Department of Public Health</h4>
+        <p>Data Science Intern – Developed iOS app prototype in Swift for name, keyword, and date searches, and Python scripts to webscrape and query CDPH medical device recall databases.</p>
+      </div>
 
-    <!-- CDPH -->
-    <a href="about.html#cdph" class="experience-card">
-      <img src="img/logos/cdphnavy.png" alt="CDPH Logo">
-      <h4>California Department of Public Health</h4>
-      <p>Data Science Intern – Developed iOS app prototype in Swift for name, keyword, and date searches, and Python scripts to webscrape and query CDPH medical device recall databases.</p>
-    </a>
+      <div class="experience-card" onclick="openModal('gritlab')">
+        <img src="img/logos/gritlab.png" alt="GRIT Lab Logo" />
+        <h4>USC Global Research and Implementation (GRIT) Lab</h4>
+        <p>Research Assistant and Data Analysis Lead supporting community-based health programs, training, and field research across Kenya and Uganda.</p>
+      </div>
 
-    <!-- GRIT Lab -->
-    <a href="about.html#gritlab" class="experience-card">
-      <img src="img/logos/gritlab.png" alt="GRIT Lab Logo">
-      <h4>Global Research, Implementation & Training Lab</h4>
-      <p>Research Assistant and Data Analysis Lead supporting community-based health programs, training, and field research across Kenya and Uganda.</p>
-    </a>
+      <div class="experience-card" onclick="openModal('longbeach')">
+        <img src="img/logos/longbeach1.jpeg" alt="City of Long Beach Logo" />
+        <h4>City of Long Beach Homeless Services</h4>
+        <p>Data Analyst Intern supporting case management, service tracking, and demographic data analysis to inform homelessness prevention efforts.</p>
+      </div>
 
-    <!-- City of Long Beach -->
-    <a href="about.html#longbeach" class="experience-card">
-      <img src="img/logos/longbeach1.jpeg" alt="City of Long Beach Logo">
-      <h4>City of Long Beach Homeless Services</h4>
-      <p>Data Analyst Intern supporting case management, service tracking, and demographic data analysis to inform homelessness prevention efforts.</p>
-    </a>
+      <div class="experience-card" onclick="openModal('uscprecollege')">
+        <img src="img/logos/usc_summer_program.png" alt="USC Summer Program Logo" />
+        <h4>USC Pre-College Global Health Program</h4>
+        <p>Teaching Assistant facilitating discussions on health promotion, disease prevention, and health service delivery; managed course site and grading.</p>
+      </div>
 
-    <!-- USC Precollege -->
-    <a href="about.html#uscprecollege" class="experience-card">
-      <img src="img/logos/usc_summer_program.png" alt="USC Summer Program Logo">
-      <h4>USC Pre-College Global Health Program</h4>
-      <p>Teaching Assistant facilitating discussions on health promotion, disease prevention, and health service delivery; managed course site and grading.</p>
-    </a>
+      <div class="experience-card" onclick="openModal('campwall')">
+        <img src="img/logos/wwiicampwall.png" alt="WWII Camp Wall Logo" />
+        <h4>WWII Camp Wall Memorial</h4>
+        <p>Data Science Intern – Built SQL database and Python scripts visualizing incarceration data and stories of Japanese American internment during WWII.</p>
+      </div>
 
-    <!-- WWII Camp Wall -->
-    <a href="about.html#campwall" class="experience-card">
-      <img src="img/logos/wwiicampwall.png" alt="WWII Camp Wall Logo">
-      <h4>WWII Camp Wall Memorial</h4>
-      <p>Data Science Intern – Built SQL database and Python scripts visualizing incarceration data and stories of Japanese American internment during WWII.</p>
-    </a>
+      <div class="experience-card" onclick="openModal('keiro')">
+        <img src="img/logos/keiropurple.png" alt="Keiro Logo" />
+        <h4>Keiro Services</h4>
+        <p>Nikkei Community Summer Intern organizing intergenerational programs, health education events, and leadership workshops improving elder quality of life.</p>
+      </div>
 
-    <!-- Keiro -->
-    <a href="about.html#keiro" class="experience-card">
-      <img src="img/logos/keiropurple.png" alt="Keiro Logo">
-      <h4>Keiro Services</h4>
-      <p>Nikkei Community Summer Intern organizing intergenerational programs, health education events, and leadership workshops improving elder quality of life.</p>
-    </a>
+    </div>
+  </section>
 
+  <!-- ===== MODALS ===== -->
+  <div id="modal-cdph" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('cdph')">&times;</span>
+      <h4>California Department of Public Health (CDPH)</h4>
+      <p><em>Data Science Intern | Los Angeles, CA | Jun 2025–Present</em></p>
+      <ul>
+        <li>Improving user access to safety and recall data for medical devices available in California</li>
+        <li>Developed iOS App prototype in Swift to provide name, keyword, and date range searches, and Python scripts to webscrape CDPH medical device website and query across 3 appropriate API databases to display current recall status</li>
+      </ul>
+    </div>
   </div>
-</section>
 
+  <div id="modal-gritlab" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('gritlab')">&times;</span>
+      <h4>USC Global Research, Implementation and Training (GRIT) Lab</h4>
+      <p><em>Global Health Research Assistant | Los Angeles, CA | Jan 2023–Present</em></p>
+      <ul>
+        <li>Community-based public health research, training, service and program deployment in Africa</li>
+        <li>Conducted multiple workshops on women’s health and training of local youth public health ambassadors in data collection and interpretation methods (Kibera, Kenya 2024 and 2025)</li>
+        <li><em>“Better Health Starts with Her: A Community-Led Women’s Health Initiative in Kibera, Kenya”</em>, N. Tang et al., APRU Global Health Conference, Bangkok, Nov. 6 2024 (<a href="https://thegritlab.org/better-health-starts-with-her" target="_blank">thegritlab.org/better-health-starts-with-her</a>)</li>
+        <li>Generated a health survey and collected 600 resident responses through direct interviews with the local team</li>
+        <li>Performed data capture, cleaning, generation of CSV files and database structure for queries and analysis in SQL/R</li>
+        <li>Project lead for study on road infrastructure and user behavior to reduce road trauma and injury (Lira, Uganda 2024)</li>
+        <li>Submitted project proposal, generated data collection methodology, led preliminary data collection activities in the field, performed descriptive analysis of data using Tableau and RStudio, created policy brief detailing findings</li>
+        <li><em>“Understanding Road Trauma and Injury in Uganda”</em>, N. Tang, et al., Consortium of Universities for Global Health CUGH 2025, Atlanta, Feb. 20 2025 (<a href="https://thegritlab.org/road-safety-lira-uganda" target="_blank">thegritlab.org/road-safety-lira-uganda</a>)</li>
+        <li>Conducted interviews and focus group to evaluate causes of burns, treatment option misconceptions and treatment-seeking behavior (Kampala, Uganda 2024)</li>
+        <li>Categorical statistical analysis using SPSS on gender perceptions and adolescent health outcomes (Lira, Uganda 2024)</li>
+      </ul>
+    </div>
+  </div>
 
+  <div id="modal-longbeach" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('longbeach')">&times;</span>
+      <h4>City of Long Beach Homeless Services</h4>
+      <p><em>Data Analyst Intern | Long Beach, CA | Jun 2024–Present</em></p>
+      <ul>
+        <li>Local government department providing programming and support to those experiencing homelessness in Long Beach</li>
+        <li>Support case management and service data for program enrollment, assistance metrics, and program success indicators</li>
+        <li>Assist in data entry, management, and analysis of demographic data</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="modal-uscprecollege" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('uscprecollege')">&times;</span>
+      <h4>USC Global Health Pre-College Program</h4>
+      <p><em>Teaching Assistant | Los Angeles, CA | Summer 2024 & 2025</em></p>
+      <ul>
+        <li>USC 4-week college credit summer course for high schoolers exploring global health topics</li>
+        <li>Provided perspective on current approaches to promoting health, preventing disease, and delivering health services</li>
+        <li>Facilitated classroom discussion on health topics and lectures, maintained course website, grade and attendance records</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="modal-campwall" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('campwall')">&times;</span>
+      <h4>World War II Camp Wall Memorial</h4>
+      <p><em>Data Science Intern | Torrance, CA | Jun–Jul 2023</em></p>
+      <ul>
+        <li>Non-profit building a wall memorial with 120k incarcerée names to be located in Torrance’s Columbia Park</li>
+        <li>Created and populated a database containing incarceration information in Python, SQL/SQLAlchemy, and Alembic for a database migration framework allowing for error checking, cleaning, and update of entries</li>
+        <li>Created a dynamic name spacing visualization to display text as it will appear on the monument, and made searchable visualizations to tell compelling stories of the incarceration experience of Japanese Americans interned during WWII</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="modal-keiro" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal('keiro')">&times;</span>
+      <h4>Keiro Services</h4>
+      <p><em>Nikkei Community Summer Intern | Los Angeles, CA | Jun–Aug 2022</em></p>
+      <ul>
+        <li>Non-profit on improving quality of life for older adults in the Los Angeles Japanese American community</li>
+        <li>Organized health workshops, community events, and cultural programs serving older Japanese Americans</li>
+        <li>Designed outreach materials promoting intergenerational care, community awareness, and leadership-building</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
   <footer>
     <div class="footer-content">
       <p>2025 Nicole Tang</p>
       <a href="https://www.linkedin.com/in/nicolektang" target="_blank" class="social-link">
-        <img src="img/logos/LinkedIn.png" alt="LinkedIn" class="social-icon">
+        <img src="img/logos/LinkedIn.png" alt="LinkedIn" class="social-icon" />
       </a>
     </div>
   </footer>
-  
 
   <script src="script.js"></script>
 </body>

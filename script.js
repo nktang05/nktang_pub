@@ -154,3 +154,53 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+//dont touch above this//
+
+document.addEventListener("DOMContentLoaded", () => {
+  // === OPEN BUBBLE MODAL ===
+  document.querySelectorAll(".usc-icon, .bubble-trigger").forEach((trigger) => {
+    trigger.addEventListener("click", (e) => {
+      e.preventDefault();
+      const modalId = trigger.getAttribute("data-modal");
+      const modal = document.getElementById(modalId);
+
+      if (modal) {
+        document.body.appendChild(modal);
+        modal.classList.add("visible");
+
+        // ✅ Keep background scroll enabled
+        document.body.style.overflow = "auto";
+      }
+    });
+  });
+
+  // === CLOSE BUTTON ===
+  document.querySelectorAll(".modal-bubble .close").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const modal = btn.closest(".modal-bubble");
+      if (modal) {
+        modal.classList.remove("visible");
+      }
+    });
+  });
+
+  // === CLICK OUTSIDE TO CLOSE ===
+  document.addEventListener("click", (e) => {
+    const openModal = document.querySelector(".modal-bubble.visible");
+    if (openModal && e.target === openModal) {
+      openModal.classList.remove("visible");
+    }
+  });
+
+  // === ESC KEY CLOSE ===
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      document.querySelectorAll(".modal-bubble.visible").forEach((m) => {
+        m.classList.remove("visible");
+      });
+    }
+  });
+});
+
+
+

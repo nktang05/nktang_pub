@@ -1300,3 +1300,184 @@ section + section {
   }
 }
 
+
+
+
+/* === Bubble overlay === */
+.modal-bubble {
+  display: none;
+  position: fixed;               /* Fixed to viewport */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+
+  /* ✅ Slightly dim + blur background */
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px) brightness(0.9);
+  -webkit-backdrop-filter: blur(8px) brightness(0.9);
+
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.modal-bubble.visible {
+  display: flex;
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-bubble-content {
+  position: fixed;
+  top: 45%;
+  left: 45%;
+  transform: translate(-50%, -55%); 
+  background: url("img/bubble.png") center/contain no-repeat;
+  background-color: transparent;
+  width: 38vw;           /* increased from 85vw — fills more of the screen */
+  max-width: 750px;      /* allows a bigger bubble on large screens */
+  aspect-ratio: 1 / 0.78; /* slightly wider bubble shape */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8rem 3rem;    /* more room for text inside */
+  text-align: center;
+  color: var(--text);
+  z-index: 10000;
+  animation: bubblePop 0.3s ease-out;
+}
+
+.modal-bubble-inner {
+  max-width: 70%;
+  transform: translate(5%, -10%); /* → moves 10% right, 10% up */
+  margin-top: -1rem;              /* small upward shift */
+}
+
+.modal-bubble-content h3 {
+  color: var(--navy-deep);
+  font-size: 1.3rem;
+  margin-bottom: 0.7rem;
+  line-height: 1.3;
+}
+
+.modal-bubble-content p {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  text-align: justify;
+  color: var(--text);
+  margin: 0 auto;
+}
+
+
+
+/* === Close Button === */
+.modal-bubble .close {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  font-size: 1.6rem;
+  color: var(--navy-light);
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.modal-bubble .close:hover {
+  color: var(--rosegold);
+  transform: rotate(90deg);
+}
+
+/* === Animation === */
+@keyframes bubblePop {
+  from { opacity: 0; transform: translate(-50%, -48%) scale(0.95); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* === Responsive === */
+@media (max-width: 700px) {
+  .modal-bubble-content {
+    padding: 4rem 2rem;
+    max-width: 90%;
+  }
+}
+
+
+/* Character that appears when modal is open */
+.modal-character {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 2rem;
+  width: 200px;              /* adjust size as needed */
+  height: auto;
+  z-index: 10001;            /* above the blurred background */
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s ease;
+  bottom: -1rem;               /* raise her slightly closer to the bubble */
+  right: 20rem;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.15));
+}
+
+/* when modal is visible, fade in and lift slightly */
+.modal-bubble.visible .modal-character {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* optional hover effect */
+.modal-character:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+@keyframes floaty {
+  0%, 100% { transform: translate(-50%, -48%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.01); }
+}
+
+.modal-bubble-content {
+  animation: floaty 6s ease-in-out infinite;
+}
+
+
+/*read in text*/
+
+@keyframes revealWords {
+  from { opacity: 0; filter: blur(4px); transform: translateY(5px); }
+  to { opacity: 1; filter: blur(0); transform: translateY(0); }
+}
+
+/* Container setup */
+.modal-bubble-inner p {
+  opacity: 0;
+  animation: revealWords 1s ease forwards;
+  animation-delay: 0.3s;
+}
+
+/* Split words dynamically */
+.modal-bubble-inner p span {
+  opacity: 0;
+  display: inline-block;
+  animation: revealWords 0.3s ease forwards;
+}
+
+/* Delay each word slightly */
+.modal-bubble-inner p span:nth-child(n) {
+  animation-delay: calc(0.07s * var(--word-index));
+}
+
+/* Title fades in first */
+.modal-bubble-inner h3 {
+  opacity: 0;
+  animation: fadeTitle 0.8s ease forwards;
+  animation-delay: 0.1s;
+}
+
+@keyframes fadeTitle {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}

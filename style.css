@@ -1235,3 +1235,68 @@ section + section {
   border-radius: 4px;
   padding: 2px 4px;
 }
+
+/* === Centered Icon + Text Wrapper (with offset compensation) === */
+.icon-wrapper {
+  position: absolute;
+  bottom: 0rem;
+  right: -1rem; /* ← increase this value to push farther right */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  text-align: center;
+  width: fit-content;
+  transform: translateX(-10%); /* small balance tweak if bubble makes it appear off-center */
+  z-index: 5;
+}
+
+
+/* USC Character Icon */
+.icon-wrapper .usc-icon img {
+  width: 100px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  animation: gentleFloat 2s infinite ease-in-out;
+}
+
+.icon-wrapper .usc-icon img:hover {
+  transform: scale(1.05);
+}
+
+/* "click me" perfectly centered below icon */
+.icon-wrapper .click-me-text {
+  font-size: 0.8rem;
+  color: var(--rosegold);
+  text-align: center;
+  margin: 0;
+  animation: gentleBlink 2s infinite ease-in-out;
+}
+
+
+
+/* Animations */
+@keyframes gentleBlink {
+  0%, 100% { opacity: 0.7; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-2px); }
+}
+
+@keyframes gentleFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .icon-wrapper {
+    position: static;
+    align-items: center;
+    transform: none;
+    margin-top: 1rem;
+  }
+}
+

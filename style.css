@@ -317,9 +317,9 @@ footer {
 
 .carousel-card {
   display: grid;
-  grid-template-columns: 0.95fr 1fr; /* image slightly smaller than text for balance */
-  align-items: center;              /* vertically center both sides */
-  justify-items: center;            /* horizontally center both sides */
+  grid-template-columns: 0.95fr 1fr; 
+  align-items: center;              
+  justify-items: center;           
   gap: 3rem;
   max-width: 1200px;
   background-color: var(--ivory);
@@ -330,14 +330,14 @@ footer {
   position: relative;
 }
 
-/* ✅ Centers and constrains the carousel area */
+
 .carousel-container {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 500px;   /* keeps image side proportional */
+  max-width: 500px;   
   aspect-ratio: 4 / 3;
   overflow: hidden;
   background: none;
@@ -345,16 +345,15 @@ footer {
   box-shadow: none;
 }
 
-/* ✅ Keeps each slide centered and contained */
+
 .carousel img {
   width: 100%;
   height: 100%;
-  object-fit: contain; /* ensures full photo visibility */
+  object-fit: contain;
   border-radius: 12px;
   display: block;
 }
 
-/* ✅ Text stays neatly aligned toward the top */
 .carousel-description {
   align-self: start;
   text-align: left;
@@ -389,7 +388,7 @@ footer {
 ========================================= */
 .carousel-dots {
   position: absolute;
-  bottom: 12px;              /* ✅ moves them below the image */
+  bottom: 12px;              
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -397,9 +396,9 @@ footer {
   align-items: center;
   gap: 10px;
   z-index: 4;
-  background: rgba(255, 255, 255, 0.6); /* subtle background for readability */
+  background: rgba(255, 255, 255, 0.6); 
   padding: 6px 12px;
-  border-radius: 20px;       /* soft pill shape background */
+  border-radius: 20px;      
   backdrop-filter: blur(6px);
 }
 
@@ -496,7 +495,7 @@ footer {
   }
 
   .carousel img {
-    max-height: 320px; /* smaller screens need smaller limit */
+    max-height: 320px; 
   }
 
   .carousel-description {
@@ -602,22 +601,22 @@ footer {
 .research-image-link {
   flex: 1.1;
   display: flex;
-  justify-content: center;   /* ✅ centers image, not aligned left */
+  justify-content: center;   
   align-items: center;
-  background: none;          /* ✅ removes any background box */
+  background: none;          
   box-shadow: none;
-  margin: 0;                 /* ✅ removes offset */
+  margin: 0;                 
 }
 
 .research-image {
   width: 100%;
   height: auto;
-  max-width: 450px;          /* ✅ keeps balanced proportion */
+  max-width: 450px;         
   max-height: 480px;
   object-fit: contain;
-  border-radius: 0;          /* ✅ removes any border rounding */
+  border-radius: 0;          
   background: none;
-  box-shadow: none;          /* ✅ removes shadow/white box */
+  box-shadow: none;          
   transition: transform 0.3s ease;
 }
 
@@ -899,8 +898,8 @@ section h3::before {
 /* Keep bullets visible and evenly spaced */
 .skills,
 section ul {
-  list-style-type: disc;         /* ✅ restores bullets */
-  padding-left: 1.5rem;          /* ✅ proper indentation */
+  list-style-type: disc;        
+  padding-left: 1.5rem;        
   margin-top: 0.8rem;
 }
 
@@ -935,8 +934,8 @@ section + section {
 .hero-photo {
   flex: 1;
   display: flex;
-  flex-direction: column;      /* ✅ stack image + text vertically */
-  align-items: center;         /* ✅ center both horizontally */
+  flex-direction: column;      
+  align-items: center;       
   justify-content: center;
   text-align: center;
 }
@@ -991,7 +990,7 @@ section + section {
    FIX: Prevent anchor targets from hiding under sticky header
 ========================================= */
 :target {
-  scroll-margin-top: 90px; /* adjust depending on your header height */
+  scroll-margin-top: 90px;
 }
 
 
@@ -1042,7 +1041,7 @@ section + section {
   display: none;
   align-items: center;
   justify-content: center;
-  background: rgba(17, 28, 46, 0.3); /* soft navy overlay */
+  background: rgba(17, 28, 46, 0.3);
   backdrop-filter: blur(10px) brightness(1.05);
   z-index: 9999;
   transition: opacity 0.3s ease;
@@ -1057,7 +1056,7 @@ section + section {
 /* === Modal Box === */
 .modal-content {
   background: linear-gradient(165deg, var(--ivory) 0%, #fdfbf8 60%, #f6eee8 100%);
-  border: 1.5px solid rgba(201, 163, 131, 0.4); /* rose-gold border */
+  border: 1.5px solid rgba(201, 163, 131, 0.4); 
   border-radius: 22px;
   padding: 2.4rem 3rem;
   max-width: 640px;
@@ -1065,7 +1064,7 @@ section + section {
   text-align: center;
   box-shadow:
     0 6px 20px rgba(27, 42, 65, 0.15),
-    0 0 12px rgba(201, 163, 131, 0.25); /* navy + rose-gold glow */
+    0 0 12px rgba(201, 163, 131, 0.25);
   animation: fadePop 0.4s ease forwards;
   color: var(--text);
   position: relative;
@@ -1194,8 +1193,8 @@ section + section {
   }
 
   .usc-icon {
-    position: static;          /* ❌ not absolute anymore */
-    align-self: flex-end;      /* ✅ push to right within column layout */
+    position: static;         
+    align-self: flex-end;      
     margin-top: 0.8rem;
     margin-right: 1rem;
     width: clamp(60px, 18vw, 100px);
@@ -1212,10 +1211,10 @@ section + section {
   position: absolute;
   bottom: 1.2rem;
   right: 1.5rem;
-  width: clamp(60px, 8vw, 90px); /* ✅ responsive scaling (min–max) */
+  width: clamp(60px, 8vw, 90px);
   height: auto;
   cursor: pointer;
-  z-index: 5; /* stays above card but below modal */
+  z-index: 5; 
   transition: transform 0.3s ease, filter 0.3s ease;
 }
 

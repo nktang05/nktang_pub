@@ -1236,45 +1236,61 @@ section + section {
   padding: 2px 4px;
 }
 
-/* === Centered Icon + Text Wrapper (with offset compensation) === */
+/* Wrapper for both icon and text */
 .icon-wrapper {
   position: absolute;
-  bottom: 0rem;
-  right: -1rem; /* ← increase this value to push farther right */
+  bottom: 0.5rem;
+  right: 0.5rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.25rem;
+  align-items: center; /* centers text under icon horizontally */
+  justify-content: flex-end;
   text-align: center;
-  width: fit-content;
-  transform: translateX(-10%); /* small balance tweak if bubble makes it appear off-center */
+  gap: 0.25rem;
   z-index: 5;
 }
 
-
-/* USC Character Icon */
+/* === Icon styling === */
 .icon-wrapper .usc-icon img {
   width: 100px;
   height: auto;
   display: block;
-  margin: 0 auto;
   cursor: pointer;
-  transition: transform 0.3s ease;
-  animation: gentleFloat 2s infinite ease-in-out;
+  animation: softBounceLoop 5s ease-in-out infinite;
 }
 
-.icon-wrapper .usc-icon img:hover {
-  transform: scale(1.05);
-}
-
-/* "click me" perfectly centered below icon */
+/* === “click me” text === */
 .icon-wrapper .click-me-text {
   font-size: 0.8rem;
   color: var(--rosegold);
   text-align: center;
   margin: 0;
-  animation: gentleBlink 2s infinite ease-in-out;
+  width: 100%;
+  animation: softBounceLoop 5s ease-in-out infinite;
+}
+
+/* === Soft triple-bounce keyframes === */
+@keyframes softBounceLoop {
+  0%, 10%, 20%, 100% {
+    transform: translateY(0);
+  }
+  5%, 15%, 25% {
+    transform: translateY(-6px); /* gentler lift */
+  }
+  30%, 100% {
+    transform: translateY(0);
+  }
+}
+
+/* Optional: gentle opacity breathing */
+.icon-wrapper .usc-icon img,
+.icon-wrapper .click-me-text {
+  animation: softBounceLoop 5s ease-in-out infinite, fadePulse 8s ease-in-out infinite;
+}
+
+@keyframes fadePulse {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
 }
 
 
@@ -1303,26 +1319,23 @@ section + section {
 
 
 
-/* === Bubble overlay === */
+/* === Bubble Overlay === */
 .modal-bubble {
   display: none;
-  position: fixed;               /* Fixed to viewport */
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  position: fixed;
+  inset: 0;
   z-index: 9999;
+  justify-content: center;
+  align-items: center;
 
-  /* ✅ Slightly dim + blur background */
+  /* Dim + blur background */
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(8px) brightness(0.9);
   -webkit-backdrop-filter: blur(8px) brightness(0.9);
 
-  justify-content: center;
-  align-items: center;
-  pointer-events: none;
   transition: opacity 0.3s ease;
   opacity: 0;
+  pointer-events: none;
 }
 
 .modal-bubble.visible {
@@ -1331,49 +1344,113 @@ section + section {
   pointer-events: all;
 }
 
+/* === Scale Wrapper (everything scales together) === */
+.modal-scale-wrapper {
+  position: relative;
+  width: 1000px;  /* base width */
+  height: 700px;  /* base height */
+  transform-origin: center center;
+  transform: scale(var(--modal-scale, 1));
+  transition: transform 0.3s ease;
+}
+
+/* === Responsive scaling ratio === */
+:root {
+  --modal-scale: calc(0.5 + 0.5 * (min(100vw, 1400px) / 1400));
+}
+
+/* === Bubble content === */
 .modal-bubble-content {
-  position: fixed;
-  top: 45%;
+  position: absolute;
+  top: 40%;
   left: 45%;
-  transform: translate(-50%, -55%); 
+  transform: translate(-50%, -50%) scale(1); /* fully centered immediately */
   background: url("img/bubble.png") center/contain no-repeat;
   background-color: transparent;
-  width: 38vw;           /* increased from 85vw — fills more of the screen */
-  max-width: 750px;      /* allows a bigger bubble on large screens */
-  aspect-ratio: 1 / 0.78; /* slightly wider bubble shape */
+  width: 600px;
+  height: 470px;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 8rem 3rem;    /* more room for text inside */
-  text-align: center;
+  padding: 6rem 3rem;
   color: var(--text);
+  text-align: center;
   z-index: 10000;
-  animation: bubblePop 0.3s ease-out;
+  animation: bubblePop 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform, opacity; /* GPU-optimized */
+  
 }
 
+/* === Centered pop animation — no shift === */
+@keyframes bubblePop {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.85);
+  }
+  60% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* === Text inside the bubble === */
 .modal-bubble-inner {
   max-width: 70%;
-  transform: translate(5%, -10%); /* → moves 10% right, 10% up */
-  margin-top: -1rem;              /* small upward shift */
+  transform: translate(5%, -15%);
 }
 
+/* Title */
 .modal-bubble-content h3 {
   color: var(--navy-deep);
   font-size: 1.3rem;
   margin-bottom: 0.7rem;
   line-height: 1.3;
+  opacity: 0;
+  animation: fadeTitle 0.8s ease forwards;
+  animation-delay: 0.1s;
 }
 
+/* Paragraph text */
 .modal-bubble-content p {
   font-size: 0.95rem;
   line-height: 1.55;
   text-align: justify;
   color: var(--text);
   margin: 0 auto;
+  opacity: 0;
+  animation: revealWords 1s ease forwards;
+  animation-delay: 0.3s;
+  
 }
 
+/* === Character icon === */
+.modal-character {
+  position: absolute;
+  bottom: -6rem;
+  right: -5rem;
+  width: 240px;
+  height: auto;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s ease;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.15));
+  z-index: 10001;
+}
 
+/* Fade in smoothly (no repositioning) */
+.modal-bubble.visible .modal-character {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Optional hover */
+.modal-character:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
 
 /* === Close Button === */
 .modal-bubble .close {
@@ -1391,47 +1468,16 @@ section + section {
   transform: rotate(90deg);
 }
 
-/* === Animation === */
-@keyframes bubblePop {
-  from { opacity: 0; transform: translate(-50%, -48%) scale(0.95); }
-  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+/* === Title fade-in === */
+@keyframes fadeTitle {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* === Responsive === */
-@media (max-width: 700px) {
-  .modal-bubble-content {
-    padding: 4rem 2rem;
-    max-width: 90%;
-  }
-}
-
-
-/* Character that appears when modal is open */
-.modal-character {
-  position: fixed;
-  bottom: 1.5rem;
-  right: 2rem;
-  width: 200px;              /* adjust size as needed */
-  height: auto;
-  z-index: 10001;            /* above the blurred background */
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.4s ease;
-  bottom: -1rem;               /* raise her slightly closer to the bubble */
-  right: 20rem;
-  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.15));
-}
-
-/* when modal is visible, fade in and lift slightly */
-.modal-bubble.visible .modal-character {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* optional hover effect */
-.modal-character:hover {
-  transform: scale(1.05);
-  transition: transform 0.3s ease;
+/* === Word-by-word fade animation === */
+@keyframes revealWords {
+  from { opacity: 0; filter: blur(4px); transform: translateY(5px); }
+  to { opacity: 1; filter: blur(0); transform: translateY(0); }
 }
 
 @keyframes floaty {
@@ -1443,41 +1489,9 @@ section + section {
   animation: floaty 6s ease-in-out infinite;
 }
 
-
-/*read in text*/
-
-@keyframes revealWords {
-  from { opacity: 0; filter: blur(4px); transform: translateY(5px); }
-  to { opacity: 1; filter: blur(0); transform: translateY(0); }
-}
-
-/* Container setup */
-.modal-bubble-inner p {
-  opacity: 0;
-  animation: revealWords 1s ease forwards;
-  animation-delay: 0.3s;
-}
-
-/* Split words dynamically */
-.modal-bubble-inner p span {
-  opacity: 0;
-  display: inline-block;
-  animation: revealWords 0.3s ease forwards;
-}
-
-/* Delay each word slightly */
-.modal-bubble-inner p span:nth-child(n) {
-  animation-delay: calc(0.07s * var(--word-index));
-}
-
-/* Title fades in first */
-.modal-bubble-inner h3 {
-  opacity: 0;
-  animation: fadeTitle 0.8s ease forwards;
-  animation-delay: 0.1s;
-}
-
-@keyframes fadeTitle {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+/* === Responsive scaling === */
+@media (max-width: 800px) {
+  :root {
+    --modal-scale: calc(0.45 + 0.4 * (min(100vw, 800px) / 800));
+  }
 }

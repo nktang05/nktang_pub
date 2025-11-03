@@ -1220,3 +1220,19 @@ section + section {
 }
 
 
+.pretty-link {
+  color: var(--navy-deep);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 2px solid rgba(183, 110, 121, 0.4);
+  transition: all 0.25s ease;
+  padding-bottom: 2px;
+}
+
+.pretty-link:hover {
+  color: var(--navy, #1a2a44);
+  border-bottom-color: var(--navy, #1a2a44);
+  background-color: rgba(183, 110, 121, 0.1);
+  border-radius: 4px;
+  padding: 2px 4px;
+}

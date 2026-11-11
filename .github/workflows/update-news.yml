@@ -16,6 +16,7 @@ on:
       - 'newsdesk-python/requirements.txt'
 
 permissions:
+  contents: read
   pages: write
   id-token: write
 
@@ -43,11 +44,18 @@ jobs:
           cache: pip
           cache-dependency-path: newsdesk-python/requirements.txt
 
+      - name: Debug environment
+        run: |
+          pwd
+          ls -la
+          python --version
+          python -m pip --version
+
       - name: Install packages
-        run: pip install -r requirements.txt
+        run: python -m pip install -r requirements.txt
 
       - name: Collect the news
-        run: python newsdesk.py
+        run: python -X faulthandler -u newsdesk.py
 
       - uses: actions/configure-pages@v5
 

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="author" content="Nicole Tang" />
+  <meta name="title" content="Nicole Tang | Portfolio" />
+  <meta name="image" content="https://nktang05.github.io/nktang_pub/img/logos/logo.png" />
+  <meta name="description" content="Personal website sharing my 4-year experience as a Global Health student at USC" />
+
+  <title>Nicole Tang | Gallery</title>
+  <link rel="icon" type="image/png" href="img/logos/logo.png" />
+
+  <!-- Montserrat font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Main site styles -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Gallery-specific styles -->
+  <link rel="stylesheet" href="gallery.css" />
+</head>
+
+<body>
+  <header>
+    <a href="index.html" class="logo-link">
+      <img src="img/logos/logo.png" alt="Nicole Tang Logo" class="logo-img" />
+    </a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">Experience</a>
+      <a href="research.html">Research Projects</a>
+      <a href="community.html">Community Involvement</a>
+      <a href="abroad.html">Global Health</a>
+      <a href="gallery.html" class="active">Gallery</a>
+    </nav>
+  </header>
+
+  <main class="gallery-section">
+    <h1 class="gallery-title">Photo Gallery</h1>
+
+    <div class="gallery-grid">
+      <!-- Column 1 -->
+      <div class="gallery-column">
+        <div class="gallery-item vertical" data-location="Uganda">
+          <img src="img/gallery/g1.4.jpeg" alt="Giraffe in Uganda" />
+        </div>
+        <div class="gallery-item vertical" 
+          data-location="Iceland"
+          data-notes="The coldest I have ever been!">
+          <img src="img/gallery/g1.1.jpeg" alt="Icelandic waterfall" />
+        </div>
+        <div class="gallery-item vertical" data-location="Torii Gate, Japan"
+        data-notes="On a family geneology trip!">
+          <img src="img/gallery/g1.2.jpeg" alt="Torii Gate, Japan" />
+        </div>
+        <div class="gallery-item vertical" data-location="Glencoe Scotland">
+          <img src="img/gallery/g1.5.jpeg" alt="Glencoe Scotland" />
+        </div>
+        <div class="gallery-item vertical" data-location="Glacier Hiking in Iceland">
+          <img src="img/gallery/g1.7.jpeg" alt="Glacier Hiking in Iceland" />
+        </div>
+        <div class="gallery-item vertical" data-location="Brussels, Belgium"
+        data-notes="Best fries of my life, I still think about them">
+          <img src="img/gallery/g1.8.jpeg" alt="Brussels, Belgium" />
+        </div>
+        <div class="gallery-item vertical" data-location="Tallinn, Estonia"
+        data-notes="Christmas markets!">
+          <img src="img/gallery/g1.9.jpeg" alt="Tallinn, Estonia" />
+        </div>
+      </div>
+
+      <!-- Column 2 -->
+      <div class="gallery-column">
+        <div class="gallery-item horizontal" data-location="Brazil">
+          <img src="img/gallery/g2.1.jpeg" alt="Brazil" />
+        </div>
+        <div class="gallery-item horizontal" data-location="Sierra Nevadas, California"
+        data-notes="Backpacking with my sister!">
+          <img src="img/gallery/g2.2.jpeg" alt="Sierra Nevadas, California" />
+        </div>
+        <div class="gallery-item horizontal" data-location="Mojave, California"
+        data-notes="Rapelling!">
+          <img src="img/gallery/g2.4.jpeg" alt="Mojave, California" />
+        </div>
+        <div class="gallery-item horizontal" data-location="Korea">
+          <img src="img/gallery/g2.6.jpeg" alt="Korea" />
+        </div>
+        <div class="gallery-item horizontal" data-location="United Kingdom">
+          <img src="img/gallery/g2.7.jpeg" alt="United Kingdom" />
+        </div>
+        <div class="gallery-item horizontal" data-location="Tallinn, Estonia">
+          <img src="img/gallery/g2.3.jpeg" alt="Tallinn, Estonia" />
+        </div>
+        <div class="gallery-item horizontal" data-location="El Calafate, Argentina">
+          <img src="img/gallery/g2.5.jpeg" alt="Patagonia, Argentina" />
+        </div>
+      </div>
+
+      <!-- Column 3 -->
+      <div class="gallery-column">
+        <div class="gallery-item vertical" data-location="Patagonia, Argentina">
+          <img src="img/gallery/g3.1.jpeg" alt="Patagonia Argentina" />
+        </div>
+        <div class="gallery-item vertical" data-location="Seoul, South Korea">
+          <img src="img/gallery/g3.9.jpeg" alt="Seoul, South Korea" />
+        </div>
+        <div class="gallery-item vertical" data-location="Kenya">
+          <img src="img/gallery/g3.5.jpeg" alt="Kenya" />
+        </div>
+        <div class="gallery-item vertical" data-location="London, United Kingdom">
+          <img src="img/gallery/g3.2.jpeg" alt="London, United Kingdom" />
+        </div>
+        <div class="gallery-item vertical" data-location="El Calafate, Argentina">
+          <img src="img/gallery/g3.3.jpeg" alt="El Calafate, Argentina" />
+        </div>
+        <div class="gallery-item vertical" data-location="Iceland">
+          <img src="img/gallery/g3.4.jpeg" alt="Iceland" />
+        </div>
+        <div class="gallery-item vertical" data-location="Iceland">
+          <img src="img/gallery/g3.6.jpeg" alt="Iceland" />
+        </div>
+        <div class="gallery-item vertical" data-location="Iceland">
+          <img src="img/gallery/g3.7.jpeg" alt="Iceland" />
+        </div>
+        <div class="gallery-item vertical" data-location="Barcelona, Spain">
+          <img src="img/gallery/g3.8.jpeg" alt="Barcelona, Spain" />
+        </div>
+      </div>
+    </div>
+  </main>
+
+<!-- Photo Modal -->
+<div id="photoModal" class="photo-modal">
+  <span class="photo-modal__close">&times;</span>
+
+  <div class="photo-modal__content">
+    <img id="photoModalImage" class="photo-modal__image" alt="Expanded photo" />
+
+    <!-- Location + notes -->
+    <div class="photo-modal__text">
+      <div id="photoModalLocation" class="photo-location"></div>
+      <div id="photoModalNotes" class="photo-notes"></div>
+    </div>
+  </div>
+</div>
+
+  
+  
+  
+
+  <footer>
+    <div class="footer-content">
+      <p>2025 Nicole Tang</p>
+      <a href="https://www.linkedin.com/in/nicolektang" target="_blank" class="social-link">
+        <img src="img/logos/LinkedIn.png" alt="LinkedIn" class="social-icon" />
+      </a>
+    </div>
+  </footer>
+
+ 
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const modal        = document.getElementById("photoModal");
+      const modalImg     = document.getElementById("photoModalImage");
+      const modalLoc     = document.getElementById("photoModalLocation");
+      const modalNotes   = document.getElementById("photoModalNotes");
+      const closeBtn     = document.querySelector(".photo-modal__close");
+    
+      // Click handlers for images
+      document.querySelectorAll(".gallery-item").forEach(item => {
+        item.addEventListener("click", () => {
+          const img = item.querySelector("img");
+    
+          modalImg.src = img.src;
+          modalLoc.textContent = item.dataset.location ?? "";
+    
+          // OPTIONAL: pull notes from data-notes=""
+          modalNotes.textContent = item.dataset.notes ?? "";
+    
+          modal.classList.add("is-open");
+        });
+      });
+    
+      function closeModal() {
+        modal.classList.remove("is-open");
+        modalImg.src = "";
+        modalLoc.textContent = "";
+        modalNotes.textContent = "";
+      }
+    
+      closeBtn.addEventListener("click", closeModal);
+    
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) closeModal();
+      });
+    
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeModal();
+      });
+    });
+    </script>
+    
+  
+  
+    
+
+</body>
+</html>

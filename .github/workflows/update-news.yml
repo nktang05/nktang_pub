@@ -57,16 +57,11 @@ jobs:
       - name: Collect the news
         run: python -X faulthandler -u newsdesk.py
 
-      - name: Expose the news page under the same site
-        run: |
-          mkdir -p newsdesk-python
-          cp -R newsdesk-python/docs/. newsdesk-python/
-
       - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: ./newsdesk-python/docs
 
       - name: Publish the page
         id: deploy

@@ -15,23 +15,60 @@
       <img src="img/logos/logo.png" alt="Nicole Tang Logo" class="logo-img">
     </a>
     <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">Experience</a>
-      <a href="research.html">Research Projects</a>
-      <a href="community.html">Community Involvement</a>
-      <a href="abroad.html">Global Health</a>
+      <div class="nav-item">
+        <a href="index.html">Home</a>
+      </div>
+      <div class="nav-item">
+        <a href="about.html">Experience</a>
+        <div class="dropdown-menu">
+          <a href="#education">Education</a>
+          <a href="#experience">Experience</a>
+          <a href="#skills">Skills</a>
+          <a href="#awards">Awards</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="research.html">Research Projects</a>
+        <div class="dropdown-menu">
+          <a href="research.html#burns">Burn Occurrence and Care in a Ugandan Informal Urban Settlement</a>
+          <a href="research.html#better-health">Adolescent Health In Urban Informal Settlements</a>
+          <a href="research.html#road-safety">Understanding Road Trauma and Injury</a>
+          <a href="research.html#better-health1">Better Health Starts with Her</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="community.html">Community Involvement</a>
+        <div class="dropdown-menu">
+          <a href="community.html#kesem">Camp Kesem</a>
+          <a href="community.html#JA">Japanese American Advocacy</a>
+          <a href="community.html#BTM">Cancer & Stem Cell Registry Advocacy</a>
+          <a href="community.html#nature">Nature & the Outdoor</a>
+          <a href="community.html#bread">Sourdough</a>
+          <a href="community.html#gallery-link">Photo Gallery</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="abroad.html">Global Health</a>
+        <div class="dropdown-menu">
+          <a href="abroad.html#kenya25">Kibera Kenya- Public Health Workshop 2025</a>
+          <a href="abroad.html#atlanta">Atlanta- CUGH Conference</a>
+          <a href="abroad.html#bangkok">Bangkok, Thailand- APRU Conference</a>
+          <a href="abroad.html#precollege">USC Global Health Pre College Program TA</a>
+          <a href="abroad.html#uganda">Uganda- Road Safety and Burn Study</a>
+          <a href="abroad.html#oxford">Oxford, UK- USC BISC 428</a>
+          <a href="abroad.html#korea">Korea- USC GERO 499</a>
+          <a href="abroad.html#kibera1">Kibera Kenya- Public Health Workshop 2026</a>
+          <a href="abroad.html#colombia">Colombia- USC GERO 486</a>
+          <a href="abroad.html#rome">Rome- Fall Semester Study Abroad</a>
+        </div>
+      </div>
     </nav>
   </header>
 
   <main class="fade-in">
 
-    <h2>Experience & Skills</h2>
-    <p class="reveal">
-      My academic background in <strong>Global Health and Data Science</strong> at the University of Southern California combines technical, analytical, and community-based approaches to improving public health outcomes. I’ve worked across research, data analytics, and program evaluation roles in global and local settings.
-    </p>
-
     <!-- EDUCATION -->
-    <section class="reveal">
+    <section class="reveal" id="education">
       <h3>Education</h3>
       <p><strong>University of Southern California, Los Angeles, CA</strong> (2024–2025)</p>
       <ul>
@@ -46,6 +83,11 @@
       </ul>
 
     </section>
+
+    <h2 id="experience">Experience & Skills</h2>
+    <p class="reveal">
+      My academic background in <strong>Global Health and Data Science</strong> at the University of Southern California combines technical, analytical, and community-based approaches to improving public health outcomes. I’ve worked across research, data analytics, and program evaluation roles in global and local settings.
+    </p>
 
     <!-- EXPERIENCE -->
 <section class="reveal">
@@ -361,7 +403,7 @@
 
 
     <!-- SKILLS -->
-    <section class="reveal">
+    <section class="reveal" id="skills">
       <h3>Skills Summary</h3>
       <ul class="skills">
         <li><strong>Technical Skills:</strong> SQL, Python, R, SPSS, SAS, C++, Java, Swift, HTML/CSS, Tableau, GitHub, Cognito, Canva, Figma, Excel</li>
@@ -371,7 +413,7 @@
     </section>
 
     <!-- AWARDS -->
-    <section class="reveal">
+    <section class="reveal" id="awards">
       <h3>Awards & Involvement</h3>
       <ul>
         <li><strong>USC Global Scholar Award: </strong> Received $10K Prize Award in recognition for academic excellence, integrating international experiences, connecting studies with research abroad, and demonstrating a broadened perspective on cultures, ideas, and global challenges. </li>

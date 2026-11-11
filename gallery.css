@@ -25,6 +25,10 @@
     overflow-x: hidden;
     line-height: 1.6;
   }
+
+  body.modal-open {
+    overflow: hidden;
+  }
   
   /* ======= HEADER & NAV ======= */
   header {

@@ -1,49 +1,53 @@
 // ===============================
-// FADE-IN ANIMATIONS
+// SITE INIT
 // ===============================
 document.addEventListener("DOMContentLoaded", () => {
   const fadeElements = document.querySelectorAll(".fade-in, .reveal");
 
-  // Immediately show any element already visible
-  fadeElements.forEach((el) => {
-    const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight * 0.9) {
-      el.classList.add("visible");
-    }
-  });
+  const revealVisible = () => {
+    fadeElements.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.9) {
+        el.classList.add("visible");
+      }
+    });
+  };
 
-  // Observe the rest
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.2 }
-  );
+  revealVisible();
 
-  fadeElements.forEach((el) => observer.observe(el));
-});
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
 
-// ===============================
-// CAROUSEL LOGIC
-// ===============================
-document.addEventListener("DOMContentLoaded", () => {
+    fadeElements.forEach((el) => observer.observe(el));
+  }
+
+  // ===============================
+  // CAROUSEL LOGIC
+  // ===============================
   document.querySelectorAll(".carousel-container").forEach((carousel) => {
     const slides = carousel.querySelectorAll(".slide");
+    if (!slides.length) return;
+
     const next = carousel.querySelector(".next");
     const prev = carousel.querySelector(".prev");
     const dotsContainer = carousel.querySelector(".carousel-dots");
     let index = 0;
 
-    // Create dots dynamically
     if (dotsContainer) {
       dotsContainer.innerHTML = "";
       slides.forEach((_, i) => {
         const dot = document.createElement("button");
+        dot.type = "button";
         dot.addEventListener("click", () => showSlide(i));
         dotsContainer.appendChild(dot);
       });
@@ -59,148 +63,92 @@ document.addEventListener("DOMContentLoaded", () => {
       index = i;
     }
 
-    if (next)
+    if (next) {
       next.addEventListener("click", () => {
         index = (index + 1) % slides.length;
         showSlide(index);
       });
+    }
 
-    if (prev)
+    if (prev) {
       prev.addEventListener("click", () => {
         index = (index - 1 + slides.length) % slides.length;
         showSlide(index);
       });
+    }
 
-    setInterval(() => {
+    const intervalId = setInterval(() => {
       index = (index + 1) % slides.length;
       showSlide(index);
     }, 7000);
 
+    carousel.dataset.intervalId = String(intervalId);
     showSlide(index);
   });
-});
 
-// ===============================
-// Scroll-triggered fade-in
-// ===============================
-document.addEventListener("DOMContentLoaded", () => {
-  const fadeElements = document.querySelectorAll(".fade-in, .reveal");
+  // ===============================
+  // MODAL LOGIC
+  // ===============================
+  const lockBodyScroll = (shouldLock) => {
+    document.body.classList.toggle("modal-open", shouldLock);
+  };
 
-  fadeElements.forEach((el) => {
-    const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight * 0.9) el.classList.add("visible");
-  });
+  const closeVisibleModal = (selector) => {
+    document.querySelectorAll(selector).forEach((modal) => {
+      modal.classList.remove("visible");
+    });
+  };
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.2 }
-  );
-
-  fadeElements.forEach((el) => observer.observe(el));
-});
-
-//MODAL STUFF//
-
-document.addEventListener("DOMContentLoaded", () => {
-  // OPEN MODAL for org-logo and usc-icon
-  document.querySelectorAll(".org-logo, .usc-icon").forEach((trigger) => {
+  document.querySelectorAll(".org-logo, .usc-icon, .bubble-trigger").forEach((trigger) => {
     trigger.addEventListener("click", (e) => {
       e.preventDefault();
       const modalId = trigger.getAttribute("data-modal");
       const modal = document.getElementById(modalId);
-      if (modal) {
-        document.body.appendChild(modal);
-        modal.classList.add("visible");
-        document.body.style.overflow = "hidden";
-      }
+      if (!modal) return;
+
+      document.body.appendChild(modal);
+      modal.classList.add("visible");
+      lockBodyScroll(true);
     });
   });
 
-  // CLOSE MODAL (X)
-  document.querySelectorAll(".modal .close").forEach((btn) => {
+  document.querySelectorAll(".modal .close, .modal-bubble .close").forEach((btn) => {
     btn.addEventListener("click", () => {
-      const modal = btn.closest(".modal");
+      const modal = btn.closest(".modal, .modal-bubble");
       if (modal) {
         modal.classList.remove("visible");
-        document.body.style.overflow = "";
       }
+
+      const noVisibleModal = !document.querySelector(".modal.visible, .modal-bubble.visible");
+      if (noVisibleModal) lockBodyScroll(false);
     });
   });
 
-  // CLOSE MODAL when clicking outside content
   document.addEventListener("click", (e) => {
     const modal = document.querySelector(".modal.visible");
     if (modal && e.target === modal) {
       modal.classList.remove("visible");
-      document.body.style.overflow = "";
+    }
+
+    const bubble = document.querySelector(".modal-bubble.visible");
+    if (bubble && e.target === bubble) {
+      bubble.classList.remove("visible");
+    }
+
+    if (!document.querySelector(".modal.visible, .modal-bubble.visible")) {
+      lockBodyScroll(false);
     }
   });
 
-  // CLOSE MODAL on Escape
   window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      document.querySelectorAll(".modal.visible").forEach((m) => {
-        m.classList.remove("visible");
-        document.body.style.overflow = "";
-      });
-    }
+    if (e.key !== "Escape") return;
+
+    closeVisibleModal(".modal.visible");
+    closeVisibleModal(".modal-bubble.visible");
+
+    const hasVisibleModal = document.querySelector(".modal.visible, .modal-bubble.visible");
+    if (!hasVisibleModal) lockBodyScroll(false);
   });
 });
-
-//dont touch above this//
-
-document.addEventListener("DOMContentLoaded", () => {
-  // === OPEN BUBBLE MODAL ===
-  document.querySelectorAll(".usc-icon, .bubble-trigger").forEach((trigger) => {
-    trigger.addEventListener("click", (e) => {
-      e.preventDefault();
-      const modalId = trigger.getAttribute("data-modal");
-      const modal = document.getElementById(modalId);
-
-      if (modal) {
-        document.body.appendChild(modal);
-        modal.classList.add("visible");
-
-        // ✅ Keep background scroll enabled
-        document.body.style.overflow = "auto";
-      }
-    });
-  });
-
-  // === CLOSE BUTTON ===
-  document.querySelectorAll(".modal-bubble .close").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const modal = btn.closest(".modal-bubble");
-      if (modal) {
-        modal.classList.remove("visible");
-      }
-    });
-  });
-
-  // === CLICK OUTSIDE TO CLOSE ===
-  document.addEventListener("click", (e) => {
-    const openModal = document.querySelector(".modal-bubble.visible");
-    if (openModal && e.target === openModal) {
-      openModal.classList.remove("visible");
-    }
-  });
-
-  // === ESC KEY CLOSE ===
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      document.querySelectorAll(".modal-bubble.visible").forEach((m) => {
-        m.classList.remove("visible");
-      });
-    }
-  });
-});
-
 
 

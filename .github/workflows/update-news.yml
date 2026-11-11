@@ -35,6 +35,8 @@ jobs:
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
@@ -57,8 +59,7 @@ jobs:
             echo "Archive unchanged."
           else
             git commit -m "Update news archive"
-            git pull --rebase
-            git push
+            git push origin HEAD:${GITHUB_REF_NAME}
           fi
 
       - uses: actions/configure-pages@v5

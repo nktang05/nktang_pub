@@ -206,21 +206,23 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
+  min-width: 220px;
 }
 
 .hero-photo img {
-  width: 260px;
-  height: 260px;
+  width: 220px;
+  height: 220px;
   border-radius: 50%;
   object-fit: cover;
-  object-position: 50% 10%;
+  object-position: 50% 14%;
   border: 5px solid var(--rosegold);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  transform: scale(1.18) translateY(-2px);
   transition: transform 0.4s ease;
 }
 
 .hero-photo img:hover {
-  transform: scale(1.05) rotate(-2deg);
+  transform: scale(1.24) translateY(-2px) rotate(-2deg);
 }
 
 @media (max-width: 800px) {
@@ -1015,21 +1017,23 @@ section + section {
   align-items: center;       
   justify-content: center;
   text-align: center;
+  min-width: 220px;
 }
 
 .hero-photo img {
-  width: 260px;
-  height: 260px;
+  width: 220px;
+  height: 220px;
   border-radius: 50%;
   object-fit: cover;
-  object-position: 50% 10%;
+  object-position: 50% 14%;
   border: 5px solid var(--rosegold);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  transform: scale(1.18) translateY(-2px);
   transition: transform 0.4s ease;
 }
 
 .hero-photo img:hover {
-  transform: scale(1.05) rotate(-2deg);
+  transform: scale(1.24) translateY(-2px) rotate(-2deg);
 }
 
 /* --- Subtext styling under photo --- */

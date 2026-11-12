@@ -79,6 +79,11 @@ nav {
   color: var(--rosegold);
 }
 
+.nav-item > a.active {
+  color: var(--rosegold);
+  font-weight: 600;
+}
+
 .dropdown-menu {
   position: absolute;
   top: calc(100% + 0.7rem);

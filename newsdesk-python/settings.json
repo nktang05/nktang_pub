@@ -1,6 +1,0 @@
-{
-  "autoUpdateMinutes": 60,
-  "keepDays": 14,
-  "parallel": 6,
-  "politeSeconds": 1.5
-}

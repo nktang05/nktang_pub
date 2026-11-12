@@ -1,6 +1,0 @@
-# Built by newsdesk.py on each run (published by the workflow, not stored in the repository)
-docs/
-logs/
-debug/
-__pycache__/
-*.pyc
